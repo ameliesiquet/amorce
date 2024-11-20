@@ -2,14 +2,14 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::view('/', 'welcome');
+Route::get('/dashboard', \App\Livewire\Dashboard::class)->name('dashboard');
+Route::get('/projects', \App\Livewire\Projects::class)->name('projects');
+Route::get('/accounting', \App\Livewire\Accounting::class)->name('accounting');
+Route::get('/meeting', \App\Livewire\Meeting::class)->name('meeting');
+Route::get('/newsletter', \App\Livewire\Newsletter::class)->name('newsletter');
+Route::get('/selection', \App\Livewire\Selection::class)->name('selection');
 
-Route::view('dashboard', 'dashboard')
-    ->middleware(['auth', 'verified'])
-    ->name('dashboard');
 
-Route::view('profile', 'profile')
-    ->middleware(['auth'])
-    ->name('profile');
+
 
 require __DIR__.'/auth.php';
