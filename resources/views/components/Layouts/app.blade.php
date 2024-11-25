@@ -1,3 +1,7 @@
+@livewireStyles
+
+@livewireScripts
+
 <!doctype html>
 <html lang="fr"
       class="h-full bg-gray-100">
