@@ -18,10 +18,10 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
         Fonds::factory(3)->create();
-        Fonds::factory()->create(['title' => 'Fonds général', 'specific' => false]);
-        Fonds::factory()->create(['title' => 'Fonds fonctionnement', 'specific' => false]);
+        Fonds::factory()->create(['title' => 'Fond général', 'specific' => false]);
+        Fonds::factory()->create(['title' => 'Fond fonctionnement', 'specific' => false]);
 
-        Transactions::factory(10)->create();
+        Transactions::factory(80)->create();
 
         User::factory()->create([
             'name' => 'Test User',
