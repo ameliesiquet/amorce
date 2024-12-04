@@ -1,5 +1,4 @@
-<div
-    class="px-10 py-7 bg-white rounded-3xl border border-solid border-black border-opacity-10 max-w-full shadow-[0px_0px_4px_rgba(0,0,0,0.2)] max-md:px-5">
+<div class="flex flex-col gap-4 px-10 py-7 bg-white rounded-3xl border border-solid border-black border-opacity-10 max-w-full shadow-[0px_0px_4px_rgba(0,0,0,0.2)] max-md:px-5">
     <section class="flex flex-col gap-5 justify-center w-full text-2xl font-semibold text-black max-md:max-w-full">
         <h3 class="flex gap-1.5 items-center self-stretch my-auto">{{$fund->title}}</h3>
         <hr>
@@ -17,16 +16,21 @@
                 </svg>
                 <h2>Transactions</h2>
             </div>
-            <x-search-and-filter/>
+            <x-search-and-filter field="search" label="Rechercher une transaction" />
+
         </div>
-        <livewire:fund-transactions :fund="$fund"></livewire:fund-transactions>
+        <x-fund-transactions :fund="$fund" :transactions="$this->transactions"></x-fund-transactions>
     </section>
     <!-- Action Buttons -->
-    <div class="flex flex-wrap gap-10 justify-between  mt-5 w-full text-xs text-black">
-        <x-white-button>
-            <x-icons.transfer-money/>
-            Faire une transaction
-        </x-white-button>
+    <div class="flex flex-wrap gap-10 items-end justify-between  w-full text-xs text-black mt-auto">
+        <a href="" wire:click.prevent="openmodal('make-transaction',{!! $fund !!})">
+
+        <x-white-button >
+                <x-icons.transfer-money/>
+                Faire une transaction
+            </x-white-button>
+        </a>
+
         <x-yellow-button>
             <x-icons.add/>
             Ajouter une transaction

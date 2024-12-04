@@ -8,6 +8,7 @@ use Livewire\Component;
 class SpecificFundCard extends Component
 {
     public Fonds $specificFund;
+    public $search ='';
 
     public function mount(Fonds $fund)
     {

@@ -13,9 +13,7 @@
 
 
             </div>
-            <img loading="lazy"
-                 src="https://cdn.builder.io/api/v1/image/assets/TEMP/4e288cbf3374c4ec1b1da662b932de155b018a4a6a76570c5f70ce13d138da70?placeholderIfAbsent=true&apiKey=2b615783ce9a425699ca8b86f7f04ecc"
-                 alt="Fund performance graph" class="object-contain self-center mt-5 max-w-full w-full"/>
+
         </div>
         <div class="flex gap-10 mt-5 w-full justify-between">
             <div

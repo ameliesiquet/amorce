@@ -16,4 +16,5 @@ class FundEdit extends Component
     {
         return view('livewire.modals.fund-edit');
     }
+
 }

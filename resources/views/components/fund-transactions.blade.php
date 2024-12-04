@@ -1,3 +1,5 @@
+@props(['fund','transactions'])
+
 <section class="flex flex-col mt-5 w-full max-w-full">
     <table class="w-full text-xs text-black">
         <thead>
@@ -8,20 +10,22 @@
             <th class="p-2.5 text-left">Status</th>
         </tr>
         </thead>
-        @foreach ($transactions as $transaction)
         <tbody>
-            <tr class="border-t border-neutral-400">
+        @foreach ($transactions as $transaction)
+            <tr class="border-t border-neutral-400" wire:key="{{$transaction->id}}">
                 <td class="p-4">{{ $transaction->created_at->format('d/m/Y') }}</td>
                 <td class="p-4">{{ $transaction->transaction_type }}</td>
                 <td class="p-4">{{ $transaction->amount }}€</td>
                 <td class="p-4">{{ $transaction->status_type }}</td>
             </tr>
-        </tbody>
         @endforeach
+        </tbody>
     </table>
 
     <!-- Pagination -->
-    <nav class="flex gap-4 justify-center items-end py-2.5 mt-2.5 w-full text-xs whitespace-nowrap border-t border-neutral-400" aria-label="Pagination">
+    <nav
+        class="flex gap-4 justify-center items-end py-2.5 mt-2.5 w-full text-xs whitespace-nowrap border-t border-neutral-400"
+        aria-label="Pagination">
         {{ $transactions->links() }}
     </nav>
 

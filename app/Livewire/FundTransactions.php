@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use Livewire\Attributes\Computed;
 use Livewire\Component;
 use App\Models\Fonds;
 use Livewire\WithPagination;
@@ -18,19 +19,25 @@ class FundTransactions extends Component
         $this->fund = $fund;
     }
 
-    public function render()
+    #[Computed]
+    public function transactions()
     {
-        // Paginated results
-        $transactions = $this->fund->transactions()
+        return $this->fund->transactions()
             ->where('transaction_type', 'like', '%' . $this->search . '%') // Beispiel für Filterung
             ->paginate(5);
-
-        return view('livewire.fund-transactions', compact('transactions'));
     }
+
 
     public function updatedSearch()
     {
         $this->resetPage(); // Pagination auf Seite 1 zurücksetzen
     }
+
+    public function render()
+    {
+
+        return view('livewire.fund-transactions');
+    }
+
 }
 
