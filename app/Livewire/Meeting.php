@@ -8,6 +8,6 @@ class Meeting extends Component
 {
     public function render()
     {
-        return view('livewire.pages.meeting');
+        return view('livewire.pages.meeting.meeting');
     }
 }

@@ -8,6 +8,6 @@ class Projects extends Component
 {
     public function render()
     {
-        return view('livewire.pages.projects');
+        return view('livewire.pages.projects.projects');
     }
 }

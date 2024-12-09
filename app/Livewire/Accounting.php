@@ -39,7 +39,7 @@ class Accounting extends Component
 
         $this->funds = Fonds::where('specific', false)->get();
 
-        return view('livewire.pages.accounting', [
+        return view('livewire.pages.accounting.accounting', [
             'funds' => $this->funds,
         ]);
     }

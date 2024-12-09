@@ -106,8 +106,8 @@
 
 
                 <!-- Nouveau participants possibles-->
-                <section class="flex flex-col justify-center max-w-full">
-                    <header class="flex flex-col justify-center w-full text-xl font-semibold text-black">
+                <section class="flex flex-col gap-4 justify-center max-w-full">
+                    <div class="flex flex-col justify-center w-full text-xl font-semibold text-black">
                         <div class="flex items-center w-full gap-6">
                             <x-icons.arrow-down/>
                             <div class="flex flex-col gap-2 w-full">
@@ -115,18 +115,9 @@
                                 <hr>
                             </div>
                         </div>
-                    </header>
+                    </div>
+                    <x-search-and-filter field="search" label="Rechercher une transaction" />
 
-                    <form
-                        class="flex flex-wrap gap-10 justify-between items-center pr-1.5 mt-6 w-full text-xs whitespace-nowrap text-zinc-500">
-                        <x-search-and-filter/>
-                        <button type="button"
-                                class="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-stone-900">
-                            <img loading="lazy"
-                                 src="https://cdn.builder.io/api/v1/image/assets/TEMP/2ab8156ecd48afcfd7c4865ba54bccfdbd673876da88e781467bb668f17442d4?placeholderIfAbsent=true&apiKey=2b615783ce9a425699ca8b86f7f04ecc"
-                                 class="object-contain shrink-0 my-auto w-[18px]" alt="Filter icon"/>
-                        </button>
-                    </form>
 
                     <main class="flex flex-col items-start mt-6 w-full">
                         <section class="flex flex-col items-end px-8 w-full">

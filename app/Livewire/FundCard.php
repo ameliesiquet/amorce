@@ -25,7 +25,7 @@ class FundCard extends Component
     public function transactions()
     {
         return $this->fund->transactions()
-            ->where('transaction_type', 'like', '%' . $this->search . '%') // Beispiel für Filterung
+            ->where('transaction_type', 'like', '%' . $this->search . '%')
             ->paginate(5);
     }
 
@@ -36,6 +36,6 @@ class FundCard extends Component
 
     public function render()
     {
-        return view('livewire.fund-card');
+        return view('livewire.pages.accounting.fund-card');
     }
 }

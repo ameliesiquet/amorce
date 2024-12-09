@@ -28,10 +28,15 @@
                         Ajouter une transaction
                     </p>
                 </x-yellow-button>
-                <x-white-button>
-                    <x-icons.transfer-money/>
-                    Faire une transaction
-                </x-white-button>
+                <div class="flex flex-wrap gap-10 items-end justify-between  w-full text-xs text-black mt-auto">
+                    <a href="" wire:click.prevent="openmodal('make-transaction',{{$specificFund}})">
+
+                        <x-white-button >
+                            <x-icons.transfer-money/>
+                            Faire une transaction
+                        </x-white-button>
+                    </a>
+                </div>
             </div>
         </div>
     </article>
