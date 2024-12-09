@@ -22,6 +22,6 @@ class SpecificFundCard extends Component
 
     public function render()
     {
-        return view('livewire.specific-fund-card');
+        return view('livewire.pages.accounting.specific-fund-card');
     }
 }

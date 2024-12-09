@@ -19,6 +19,6 @@ class SpecificFunds extends Component
 
     public function render()
     {
-        return view('livewire.specific-funds');
+        return view('livewire.pages.accounting.specific-funds');
     }
 }

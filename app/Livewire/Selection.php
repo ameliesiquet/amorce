@@ -8,6 +8,6 @@ class Selection extends Component
 {
     public function render()
     {
-        return view('livewire.pages.selection');
+        return view('livewire.pages.selection.selection');
     }
 }

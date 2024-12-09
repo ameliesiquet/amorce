@@ -52,8 +52,8 @@
 
                         <div class="flex h-full flex-col gap-10 overflow-y-scroll  p-12 shadow-xl my-auto">
                             <h2 class="text-2xl font-semibold text-gray-800">Faire une transaction</h2>
-                            <form action="/" method="POST"
-                                  class="flex flex-col gap-6 m-auto w-full px-8 py-10 rounded-3xl border border-solid border-black border-opacity-10 max-w-[519px] shadow-[0px_0px_4px_rgba(0,0,0,0.25)] max-md:px-5">
+                            <form action="/" method="POST "
+                                  class="flex flex-col gap-6 mx-auto my-10 w-full px-8 py-10 rounded-3xl border border-solid border-black border-opacity-10 max-w-[519px] shadow-[0px_0px_4px_rgba(0,0,0,0.25)] max-md:px-5">
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                 <div class="flex flex-col gap-2">
                                     <label for="from-fund" class="block text-xl font-medium text-black">De</label>
@@ -79,9 +79,9 @@
 
                                 <div class="flex flex-col gap-2">
                                     <label for="amount" class="block text-xl font-medium text-black">Montant</label>
-                                    <input type="number" id="amount" name="amount" placeholder="300€" required
+                                    <input  id="amount" name="amount" placeholder="300€" required
                                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-amber-200 focus:ring-amber-200 sm:text-sm"
-                                           min="0" step="0.5">
+                                    >
                                 </div>
 
                                 <div class="flex justify-between gap-10 items-start self-end mt-14 text-xs text-white whitespace-nowrap max-md:mt-10">
