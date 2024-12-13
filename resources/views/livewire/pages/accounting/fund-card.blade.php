@@ -19,8 +19,9 @@
             <x-search-and-filter field="search" label="Rechercher une transaction" />
 
         </div>
-        <x-fund-transactions :fund="$fund" :transactions="$this->transactions"></x-fund-transactions>
+        <x-fund-transactions :fund="$fund" :transactions="$this->transactions" :search="$this->search"></x-fund-transactions>
     </section>
+
     <!-- Action Buttons -->
     <div class="flex flex-wrap gap-10 items-end justify-between  w-full text-xs text-black mt-auto">
         <a href="" wire:click.prevent="openmodal('make-transaction',{!! $fund !!})">
