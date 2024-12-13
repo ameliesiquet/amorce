@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('amount');
+            $table->decimal('amount', 10, 2);
             $table->text('transaction_type');
             $table->text('status_type');
             $table->timestamps();
@@ -21,6 +21,7 @@ return new class extends Migration
             $table->foreign('fonds_id')->references('id')->on('fonds')->onDelete('cascade');
         });
     }
+
 
     /**
      * Reverse the migrations.

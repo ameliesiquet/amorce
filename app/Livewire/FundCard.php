@@ -25,7 +25,13 @@ class FundCard extends Component
     public function transactions()
     {
         return $this->fund->transactions()
-            ->where('transaction_type', 'like', '%' . $this->search . '%')
+            ->when($this->search, function ($query) {
+                $query->where(function ($query) {
+                    $query->where('transaction_type', 'like', '%' . $this->search . '%')
+                        ->orWhere('amount', 'like', '%' . $this->search . '%')
+                        ->orWhere('status_type', 'like', '%' . $this->search . '%');
+                });
+            })
             ->paginate(5);
     }
 
@@ -34,8 +40,38 @@ class FundCard extends Component
         $this->dispatch('openmodal', $which, $model);
     }
 
+    public function highlight($text, $search)
+    {
+        if (!$search) {
+            return e($text);
+        }
+
+        $highlighted = preg_replace(
+            '/(' . preg_quote($search, '/') . ')/i',
+            '<span class="text-black-500 font-bold underline ">$1</span>',
+            e($text)
+        );
+
+        return $highlighted;
+    }
+
     public function render()
     {
-        return view('livewire.pages.accounting.fund-card');
+        $transactions = $this->fund->transactions()
+            ->when($this->search, function ($query) {
+                $query->where(function ($query) {
+                    $query->where('transaction_type', 'like', '%' . $this->search . '%')
+                        ->orWhere('amount', 'like', '%' . $this->search . '%')
+                        ->orWhere('status_type', 'like', '%' . $this->search . '%');
+                });
+            })
+            ->paginate(5);
+
+
+        return view('livewire.pages.accounting.fund-card', [
+            'transactions' => $transactions,
+            'search' => $this->search,
+        ]);
     }
+
 }

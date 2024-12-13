@@ -17,11 +17,11 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // User::factory(10)->create();
-        Fonds::factory(3)->create();
+        Fonds::factory(7)->create();
         Fonds::factory()->create(['title' => 'Fond général', 'specific' => false]);
         Fonds::factory()->create(['title' => 'Fond fonctionnement', 'specific' => false]);
 
-        Transactions::factory(80)->create();
+        Transactions::factory(150)->create();
 
         User::factory()->create([
             'name' => 'Test User',
