@@ -1,31 +1,10 @@
 <section x-data="{ isOpen: true }">
     <div x-show="isOpen" class="relative z-10 " aria-labelledby="slide-over-title" role="dialog" aria-modal="true">
         <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
-
         <div class="fixed inset-0 overflow-hidden ">
             <div class="absolute inset-0 overflow-hidden ">
                 <div class="pointer-events-none fixed inset-y-0 right-0 flex pl-10 ">
-                    <!--
-                      Slide-over panel, show/hide based on slide-over state.
-
-                      Entering: "transform transition ease-in-out duration-500 sm:duration-700"
-                        From: "translate-x-full"
-                        To: "translate-x-0"
-                      Leaving: "transform transition ease-in-out duration-500 sm:duration-700"
-                        From: "translate-x-0"
-                        To: "translate-x-full"
-                    -->
                     <div class="pointer-events-auto relative w-screen max-w-screen-md bg-white ">
-                        <!--
-                          Close button, show/hide based on slide-over state.
-
-                          Entering: "ease-in-out duration-500"
-                            From: "opacity-0"
-                            To: "opacity-100"
-                          Leaving: "ease-in-out duration-500"
-                            From: "opacity-100"
-                            To: "opacity-0"
-                        -->
                         <div class="flex p-6 ">
                             <button
                                 @click="isOpen = false"
@@ -39,31 +18,39 @@
                                 </svg>
                             </button>
                         </div>
-
-                        <div class="flex h-full flex-col overflow-y-scroll p-16 shadow-xl my-auto">
-                            <h2 class="font-bold text-2xl leading-6 text-gray-900" id="slide-over-title">Modifier le fond</h2>
-                            <form
-                                class="flex flex-col m-auto w-full px-8 py-10 rounded-3xl border border-solid border-black border-opacity-10 max-w-[519px] shadow-[0px_0px_4px_rgba(0,0,0,0.25)] max-md:px-5"
-                                aria-labelledby="section-title">
-                                <div class="flex flex-col gap-3 w-full max-md:max-w-full">
-                                    <label for="fund-name"
-                                           id="section-title"
-                                           class="flex gap-6 items-start w-full text-2xl font-semibold text-black whitespace-nowrap max-md:max-w-full">
-                                        Nom
-                                    </label>
+                        <div class="flex h-full flex-col items-center mx-auto shadow-xl mt-4">
+                            <div class="flex flex-col gap-10 w-full max-w-xl">
+                                <h2 class="text-2xl font-semibold text-gray-800 text-left">Modifier le fond</h2>
+                                <form action="/" method="POST"
+                                      class="flex flex-col gap-6 w-full px-8 py-10 rounded-3xl border border-solid border-black border-opacity-10 shadow-[0px_0px_4px_rgba(0,0,0,0.25)] max-md:px-5">
+                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                    <div class="flex flex-col gap-3 w-full max-md:max-w-full">
+                                        <label for="fund-name"
+                                               id="section-title"
+                                               class="block text-xl font-medium text-black">
+                                            Nom
+                                        </label>
                                         <input id="fund-name" name="general-background" type="text" placeholder="Fond général"
-                                               class="border border-solid border-gray-300 rounded-xl px-3 py-4 w-full">
+                                               class="mt-1 text-zinc-800 text-s block w-full border-t-0 border-l-0 border-r-0 border-b-1 border-b-gray-500 focus:border-b-amber-200 focus:outline-none focus:ring-white outline-none bg-transparent">
+                                    </div>
+                                    <div class="flex w-full justify-between">
+                                        <a
+                                            class="flex justify-between gap-10 items-start self-end mt-14 text-xs text-white whitespace-nowrap max-md:mt-10">
+                                            <x-white-button>
+                                                <x-icons.delete/>
+                                                <p>supprimer</p>
+                                            </x-white-button>
+                                        </a>
+                                        <a
+                                            class="flex justify-between gap-10 items-start self-end mt-14 text-xs text-white whitespace-nowrap max-md:mt-10">
+                                            <x-yellow-button>
+                                                <p>enregistrer</p>
+                                            </x-yellow-button>
+                                        </a>
+                                    </div>
 
-                                </div>
-
-                                <a
-                                    class="flex justify-between gap-10 items-start self-end mt-14 text-xs text-white whitespace-nowrap max-md:mt-10">
-                                    <x-red-button>
-                                        <x-icons.delete stroke="white"/>
-                                        <p class="text-white">supprimer</p>
-                                    </x-red-button>
-                                </a>
-                            </form>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>

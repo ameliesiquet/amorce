@@ -33,6 +33,11 @@ class Accounting extends Component
 
     }
 
+    public function openmodal($which, $model = null): void
+    {
+        $this->dispatch('openmodal', $which, $model);
+    }
+
 
     public function render()
     {
