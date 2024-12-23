@@ -1,5 +1,5 @@
-<main class="flex flex-col gap-6 sm:gap-10 py-16 px-8 sm:px-22 md:px-24 lg:ml-64 ">
-    <h1 class=" mb-2 sm:mb-8 text-3xl font-bold">Comptabilité</h1>
+<main class="flex flex-col mt-2 sm:mt-6 gap-6  sm:gap-8 md:gap-10 py-16 px-8 sm:px-14 md:px-20 lg:px-24 lg:ml-64 ">
+    <h1 class=" text-3xl font-bold">Comptabilité</h1>
     <livewire:components.accounting-cards/>
 
     <section class="flex flex-wrap gap-4 lg:gap-8 sm:justify-between items-center m-auto sm:m-0">
