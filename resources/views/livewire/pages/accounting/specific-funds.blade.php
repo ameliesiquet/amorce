@@ -3,7 +3,7 @@
     <section class="flex flex-wrap gap-10 justify-between items-center">
         <x-search-and-filter label="Rechercher un fond" field="search"/>
     </section>
-    <section class="flex flex-row gap-10">
+    <section class="grid grid-cols-1 xl:grid-cols-2 2xl:grid-cols-3 gap-x-14 gap-y-8">
         @foreach($this->specificFunds as $fund)
             <livewire:specific-fund-card :$fund :key="$fund->id"/>
         @endforeach
