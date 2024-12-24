@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Pages\Accounting;
 
 use App\Models\Fonds;
 use Livewire\Attributes\Computed;
 use Livewire\Component;
 use Livewire\WithPagination;
-
 
 
 class Accounting extends Component

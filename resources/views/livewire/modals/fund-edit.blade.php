@@ -1,3 +1,4 @@
+
 <section x-data="{ isOpen: true }">
     <div x-show="isOpen" class="relative z-10 " aria-labelledby="slide-over-title" role="dialog" aria-modal="true">
         <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
@@ -30,7 +31,10 @@
                                                class="block text-xl font-medium text-black">
                                             Nom
                                         </label>
-                                        <input id="fund-name" name="general-background" type="text" placeholder="Fond général"
+                                        <input id="fund-name"
+                                               name="general-background"
+                                               type="text"
+                                               wire:model.blur="form.title"
                                                class="mt-1 text-zinc-800 text-s block w-full border-t-0 border-l-0 border-r-0 border-b-1 border-b-gray-500 focus:border-b-amber-200 focus:outline-none focus:ring-white outline-none bg-transparent">
                                     </div>
                                     <div class="flex w-full justify-between">

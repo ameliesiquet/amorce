@@ -2,13 +2,17 @@
 
 namespace App\Models;
 
-use App\Livewire\SpecificFundCard;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Fonds extends Model
 {
+    /** @use HasFactory<\Database\Factories\FondsFactory> */
     use HasFactory;
+
+    protected $fillable = [
+        'title',
+    ];
 
     public function transactions()
     {

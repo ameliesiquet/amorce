@@ -2,14 +2,35 @@
 
 namespace App\Livewire\Modals;
 
+use App\Livewire\Forms\EditFundForm;
+use App\Models\Fonds;
 use Livewire\Component;
 
 class FundEdit extends Component
 {
-    public $specificFund;
-    public function mount($specificFund = null)
+
+    public Fonds $fund;
+    public $model;
+    public EditFundForm $form;
+
+    public function mount($model = null)
     {
-        $this->specificFund = $specificFund;
+        if ($model) {
+            $this->fund = Fonds::find($model);
+            if ($this->fund) {
+                $this->form->title = $this->fund->title;
+            }
+        }
+    }
+
+
+    public function editFund()
+    {
+        $this->validate();
+        $data = $this->form->all();
+        $fund = Fonds::find($this->model['id']);
+        $fund->update($data);
+
     }
 
     public function render()

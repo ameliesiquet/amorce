@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Pages\Accounting;
 
 use App\Models\Fonds;
 use Livewire\Component;
@@ -15,10 +15,12 @@ class SpecificFundCard extends Component
         $this->specificFund = $fund;
     }
 
-    public function openmodal($which, $model = null): void
+    public function openmodal($which, $modelId = null): void
     {
-        $this->dispatch('openmodal', $which, $model);
+        $this->dispatch('openmodal', $which, $modelId);
     }
+
+
 
     public function render()
     {
