@@ -1,4 +1,5 @@
-<section x-data="{ isOpen: true }">
+@props(['funds'])
+<section x-data="{ isOpen: true }" @close-modal.window="isOpen = false">
     <div x-show="isOpen" class="relative z-10 " aria-labelledby="slide-over-title" role="dialog" aria-modal="true">
         <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
         <div class="fixed inset-0 overflow-hidden ">
@@ -29,10 +30,9 @@
                                         <label for="from-fund" class="block text-xl font-medium text-black">De</label>
                                         <select id="from-fund" name="from_fund" required
                                                 class="mt-1 block text-zinc-800 text-s w-full border-t-0 border-l-0 border-r-0 border-b-1 border-b-gray-500 focus:border-b-amber-200 focus:outline-none focus:ring-white outline-none bg-transparent">
-                                            <option value="">Fond général</option>
-                                            <option value="fund1">Fonds spécifique</option>
-                                            <option value="fund2">Fonds 2</option>
-                                            <option value="fund3">Fonds 3</option>
+                                            @foreach ($funds as $fund)
+                                                <option value="{{ $fund->id }}">{{ $fund->title }}</option>
+                                            @endforeach
                                         </select>
                                     </div>
 
@@ -40,10 +40,9 @@
                                         <label for="to-fund" class="block text-xl font-medium text-black">Vers</label>
                                         <select id="to-fund" name="to_fund" required
                                                 class="mt-1 text-zinc-800 text-s block w-full border-t-0 border-l-0 border-r-0 border-b-1 border-b-gray-500 focus:border-b-amber-200 focus:outline-none focus:ring-white outline-none bg-transparent">
-                                            <option value="">Fond général</option>
-                                            <option value="fund1">Fonds spécifique</option>
-                                            <option value="fund2">Fonds 2</option>
-                                            <option value="fund3">Fonds 3</option>
+                                            @foreach ($funds as $fund)
+                                                <option value="{{ $fund->id }}">{{ $fund->title }}</option>
+                                            @endforeach
                                         </select>
                                     </div>
 

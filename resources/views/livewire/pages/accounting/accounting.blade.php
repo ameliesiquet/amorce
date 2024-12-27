@@ -23,12 +23,15 @@
                 Importer un fichier CSV
             </x-yellow-button>
         </div>
+
     </section>
 
     <section class="grid grid-cols-1 2xl:grid-cols-2 gap-6">
         @foreach($funds as $fund)
-                <livewire:fund-card :fund="$fund"/>
+                <livewire:pages.accounting.fund-card :fund="$fund"/>
         @endforeach
     </section>
-    <livewire:specific-funds/>
+
+
+    <livewire:pages.accounting.specific-funds/>
 </main>
