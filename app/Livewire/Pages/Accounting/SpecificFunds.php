@@ -9,6 +9,8 @@ use Livewire\Component;
 class SpecificFunds extends Component
 {
     public $search = '';
+    protected $listeners = ['refresh-specific-funds' => 'refreshSpecificFunds'];
+
     #[Computed]
     public function specificFunds()
     {
@@ -19,6 +21,8 @@ class SpecificFunds extends Component
 
     public function render()
     {
+        $this->funds = Fonds::where('specific', true)->get();
+
         return view('livewire.pages.accounting.specific-funds');
     }
 }

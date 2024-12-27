@@ -3,6 +3,7 @@
 namespace App\Livewire\Pages\Accounting;
 
 use App\Models\Fonds;
+use Livewire\Attributes\On;
 use Livewire\Component;
 
 class SpecificFundCard extends Component
@@ -21,7 +22,11 @@ class SpecificFundCard extends Component
     }
 
 
-
+    #[On('refresh-specific-funds')]
+    public function refreshFunds(): void
+    {
+        $this->funds = Fonds::where('specific', true)->get();
+    }
     public function render()
     {
         return view('livewire.pages.accounting.specific-fund-card');

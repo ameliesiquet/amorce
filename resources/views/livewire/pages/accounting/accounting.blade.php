@@ -18,13 +18,11 @@
                     </p>
                 </x-white-button>
             </a>
-            <!-- Import Button  -->
             <x-yellow-button>
                 <x-icons.import/>
                 Importer un fichier CSV
             </x-yellow-button>
         </div>
-
     </section>
 
     <section class="grid grid-cols-1 2xl:grid-cols-2 gap-6">
@@ -32,7 +30,5 @@
                 <livewire:fund-card :fund="$fund"/>
         @endforeach
     </section>
-
-
     <livewire:specific-funds/>
 </main>

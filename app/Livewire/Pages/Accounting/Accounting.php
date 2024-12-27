@@ -4,6 +4,7 @@ namespace App\Livewire\Pages\Accounting;
 
 use App\Models\Fonds;
 use Livewire\Attributes\Computed;
+use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -17,9 +18,9 @@ class Accounting extends Component
 
     public $specificFunds;
 
-    public function updatedSearch()
+    public function mount(): void
     {
-        $this->resetPage();
+        $this->funds = Fonds::where('specific', false)->get();
     }
 
     #[Computed]
@@ -29,8 +30,8 @@ class Accounting extends Component
             ->filter(['search' => $this->search])
             ->orderBy('title')
             ->get();
-
     }
+
 
     public function openmodal($which, $model = null): void
     {
@@ -40,8 +41,6 @@ class Accounting extends Component
 
     public function render()
     {
-
-        $this->funds = Fonds::where('specific', false)->get();
 
         return view('livewire.pages.accounting.accounting', [
             'funds' => $this->funds,

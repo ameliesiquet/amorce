@@ -13,24 +13,24 @@ class FundEdit extends Component
     public $model;
     public EditFundForm $form;
 
-    public function mount($model = null)
+    public function mount($model = null): void
     {
-        if ($model) {
-            $this->fund = Fonds::find($model);
-            if ($this->fund) {
-                $this->form->title = $this->fund->title;
-            }
+        $this->model = $model;
+        $this->fund = Fonds::find($model);
+        if ($this->fund) {
+            $this->form->title = $this->fund->title;
         }
+
     }
 
-
-    public function editFund()
+    public function editFund(): void
     {
         $this->validate();
         $data = $this->form->all();
-        $fund = Fonds::find($this->model['id']);
+        $fund = Fonds::find($this->model);
         $fund->update($data);
-
+        $this->dispatch('refresh-specific-funds');
+        $this->dispatch('close-modal');
     }
 
     public function render()

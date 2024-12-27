@@ -1,5 +1,5 @@
 
-<section x-data="{ isOpen: true }">
+<section x-data="{ isOpen: true }" @close-modal.window="isOpen = false">
     <div x-show="isOpen" class="relative z-10 " aria-labelledby="slide-over-title" role="dialog" aria-modal="true">
         <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
         <div class="fixed inset-0 overflow-hidden ">
@@ -22,7 +22,7 @@
                         <div class="flex h-full flex-col items-center mx-auto shadow-xl mt-4">
                             <div class="flex flex-col gap-10 w-full max-w-xl">
                                 <h2 class="text-2xl font-semibold text-gray-800 text-left">Modifier le fond</h2>
-                                <form action="/" method="POST"
+                                <form action="/" method="POST" wire:submit.prevent="editFund"
                                       class="flex flex-col gap-6 w-full px-8 py-10 rounded-3xl border border-solid border-black border-opacity-10 shadow-[0px_0px_4px_rgba(0,0,0,0.25)] max-md:px-5">
                                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                     <div class="flex flex-col gap-3 w-full max-md:max-w-full">
@@ -34,7 +34,7 @@
                                         <input id="fund-name"
                                                name="general-background"
                                                type="text"
-                                               wire:model.blur="form.title"
+                                               wire:model.defer="form.title"
                                                class="mt-1 text-zinc-800 text-s block w-full border-t-0 border-l-0 border-r-0 border-b-1 border-b-gray-500 focus:border-b-amber-200 focus:outline-none focus:ring-white outline-none bg-transparent">
                                     </div>
                                     <div class="flex w-full justify-between">
@@ -52,7 +52,6 @@
                                             </x-yellow-button>
                                         </a>
                                     </div>
-
                                 </form>
                             </div>
                         </div>
