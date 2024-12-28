@@ -3,6 +3,7 @@
     <livewire:components.accounting-cards/>
 
     <section class="flex flex-wrap gap-4 lg:gap-8 sm:justify-between items-center m-auto sm:m-0">
+        <h2 class="hidden">Buttons</h2>
         <a href="">
             <x-yellow-button>
                 <x-icons.add/>
@@ -10,7 +11,7 @@
             </x-yellow-button>
         </a>
         <div class="flex gap-4">
-            <a href="" wire:click.prevent="openmodal('add-donation',{{$funds}})">
+            <a href="" wire:click.prevent="openmodal('add-donation')">
                 <x-white-button>
                     <x-icons.add/>
                     <p>

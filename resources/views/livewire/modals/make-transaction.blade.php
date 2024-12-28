@@ -23,6 +23,7 @@
                             <div class="flex flex-col gap-10 w-full max-w-xl">
                                 <h2 class="text-2xl font-semibold text-gray-800 text-left">Faire une transaction</h2>
                                 <form action="/" method="POST"
+                                      wire:submit.prevent="makeTransaction"
                                       class="flex flex-col gap-6 w-full px-8 py-10 rounded-3xl border border-solid border-black border-opacity-10 shadow-[0px_0px_4px_rgba(0,0,0,0.25)] max-md:px-5">
                                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
@@ -49,7 +50,13 @@
                                     <div class="flex flex-col gap-2">
                                         <label for="amount" class="block text-xl font-medium text-black">Montant</label>
                                         <input id="amount" name="amount" placeholder="300€" required
-                                               class="mt-1 text-zinc-800 text-s block w-full border-t-0 border-l-0 border-r-0 border-b-1 border-b-gray-500 focus:border-b-amber-200 focus:outline-none focus:ring-white outline-none bg-transparent">
+                                               class="mt-1 text-zinc-800 text-s block w-full border-t-0 border-l-0 border-r-0 border-b-1 border-b-gray-500 focus:border-b-amber-200 focus:outline-none focus:ring-white outline-none bg-transparent"
+                                        >
+                                        @error('form.amount')
+                                        <span class="text-red-500 text-sm mt-1">
+                                            {{ $message }}
+                                        </span>
+                                        @enderror
                                     </div>
 
                                     <div class="flex justify-between gap-10 items-start mt-14 text-xs text-white whitespace-nowrap max-md:mt-10 self-center">

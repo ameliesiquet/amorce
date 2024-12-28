@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Modals;
 
+use App\Livewire\Forms\MakeTransactionForm;
 use App\Models\Fonds;
 use Livewire\Component;
 
@@ -9,6 +10,10 @@ class MakeTransaction extends Component
 {
     public $fund;
     public $funds;
+    public $model;
+
+
+    public MakeTransactionForm $form;
     public $specificFund;
 
 
@@ -18,6 +23,16 @@ class MakeTransaction extends Component
         $this->funds = Fonds::all();
 
         $this->specificFund = $specificFund;
+    }
+
+    public function makeTransaction(): void
+    {
+        $this->validate();
+        $data = $this->form->all();
+        $fund = Fonds::find($this->model);
+        $fund->update($data);
+        $this->dispatch('refresh-make-transaction');
+        $this->dispatch('close-modal');
     }
 
     public function render()

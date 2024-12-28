@@ -1,9 +1,10 @@
 <section class="cards flex flex-wrap gap-4 sm:gap-10 items-center">
+    <h2 class="hidden">Cards</h2>
     @foreach($accCards as $accCard)
         <article class="revenue-card flex gap-5 items-start px-4 py-4 sm:px-6 sm:py-6 bg-white rounded-2xl shadow-md  sm:w-auto md:px-5 md:py-8">
             <div class="flex flex-col">
                 <div class="flex justify-between items-end gap-3">
-                    <h2 class=" text-sm sm:text-l font-medium text-black md:text:xl">{{$accCard['title']}}</h2>
+                    <h3 class=" text-sm sm:text-l font-medium text-black md:text:xl">{{$accCard['title']}}</h3>
                     <time class="text-xs sm:text-sm text-gray-600">{{$accCard['time']}}</time>
                 </div>
                 <div class="flex gap-5 items-center mt-2 sm:mt-5">

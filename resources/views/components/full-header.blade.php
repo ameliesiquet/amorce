@@ -2,5 +2,4 @@
     <x-application-logo/>
     <x-sidebar class="flex flex-2" />
     <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
-
 </header>

@@ -12,6 +12,7 @@ class AddDonation extends Component
     public function mount(): void
     {
         $this->funds = Fonds::all();
+        dd($this->funds);
     }
 
     public function render()

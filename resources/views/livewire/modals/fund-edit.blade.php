@@ -1,4 +1,3 @@
-
 <section x-data="{ isOpen: true }" @close-modal.window="isOpen = false">
     <div x-show="isOpen" class="relative z-10 " aria-labelledby="slide-over-title" role="dialog" aria-modal="true">
         <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
@@ -35,7 +34,13 @@
                                                name="general-background"
                                                type="text"
                                                wire:model.defer="form.title"
-                                               class="mt-1 text-zinc-800 text-s block w-full border-t-0 border-l-0 border-r-0 border-b-1 border-b-gray-500 focus:border-b-amber-200 focus:outline-none focus:ring-white outline-none bg-transparent">
+                                               class="mt-1 text-zinc-800 text-s block w-full border-t-0 border-l-0 border-r-0 border-b-1 border-b-gray-500 focus:border-b-amber-200 focus:outline-none focus:ring-white outline-none bg-transparent"
+                                        >
+                                        @error('form.title')
+                                        <span class="text-red-500 text-sm mt-1">
+                                            {{ $message }}
+                                        </span>
+                                        @enderror
                                     </div>
                                     <div class="flex w-full justify-between">
                                         <a

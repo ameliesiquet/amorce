@@ -3,7 +3,7 @@
         class="flex flex-col justify-center self-stretch px-8 py-9 my-auto bg-white rounded-3xl border border-solid border-black border-opacity-10 min-h-[231px] shadow-[0px_0px_4px_rgba(0,0,0,0.2)] max-md:px-5">
         <div class="flex flex-col justify-center w-full text-2xl font-semibold">
             <div class="flex gap-10 justify-between items-center w-full">
-                <h2 class="flex gap-1.5 items-center self-stretch my-auto">{{$specificFund->title}}</h2>
+                <h3 class="flex gap-1.5 items-center self-stretch my-auto">{{$specificFund->title}}</h3>
                 <div>
                     <a href="" wire:click.prevent="openmodal('fund-edit', {{ $specificFund->id }})">
                         <x-icons.edit />
