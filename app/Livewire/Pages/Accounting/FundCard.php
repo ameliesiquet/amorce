@@ -23,6 +23,8 @@ class FundCard extends Component
         $this->fund = $fund;
     }
 
+
+
     #[Computed]
     public function transactions()
     {
@@ -69,6 +71,18 @@ class FundCard extends Component
 
     public function render()
     {
+        $income = $this->fund->transactions()
+            ->where('status_type', 'entrée')
+            ->sum('amount');
+
+        $expenses = $this->fund->transactions()
+            ->where('status_type', 'sortie')
+            ->sum('amount');
+
+        $total = $income - $expenses;
+
+
+
         $transactions = $this->fund->transactions()
             ->when($this->search, function ($query) {
                 $query->where(function ($query) {
@@ -79,11 +93,16 @@ class FundCard extends Component
             })
             ->paginate(5);
 
-
         return view('livewire.pages.accounting.fund-card', [
             'transactions' => $transactions,
             'search' => $this->search,
+            'income' => $income,
+            'expenses' => $expenses,
+            'total' => $total,
         ]);
     }
+
+
+
 
 }

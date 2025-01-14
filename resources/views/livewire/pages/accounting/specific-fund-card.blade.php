@@ -16,7 +16,7 @@
             <div
                 class="flex flex-col justify-center self-end p-5 whitespace-nowrap bg-amber-200 rounded-md border border-solid border-black border-opacity-10 shadow-[0px_0px_4px_rgba(0,0,0,0.25)]">
                 <p class="self-start text-xs font-medium text-center">Total</p>
-                <p class="mt-1.5 text-2xl font-semibold">{{$specificFund->total}}€</p>
+                <p class="mt-1.5 text-2xl font-semibold">{{$total}}€</p>
             </div>
             <div class="flex flex-col gap-4 justify-between items-end text-xs mt-auto">
                     <a href="" wire:click.prevent="openmodal('make-transaction',{{$specificFund}})">

@@ -29,6 +29,21 @@ class SpecificFundCard extends Component
     }
     public function render()
     {
-        return view('livewire.pages.accounting.specific-fund-card');
+        $income = $this->specificFund->transactions()
+            ->where('status_type', 'entrée')
+            ->sum('amount');
+
+        $expenses = $this->specificFund->transactions()
+            ->where('status_type', 'sortie')
+            ->sum('amount');
+
+        $total = $income - $expenses;
+
+        return view('livewire.pages.accounting.specific-fund-card', [
+            'search' => $this->search,
+            'income' => $income,
+            'expenses' => $expenses,
+            'total' => $total,
+        ]);
     }
 }
