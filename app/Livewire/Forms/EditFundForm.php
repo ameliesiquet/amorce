@@ -25,7 +25,7 @@ class EditFundForm extends Form
     public function rules()
     {
         return [
-            'title' => 'required|max:10',
+            'title' => 'required|max:50',
         ];
     }
 }

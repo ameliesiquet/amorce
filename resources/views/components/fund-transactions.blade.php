@@ -29,7 +29,6 @@
             @endforeach
             </tbody>
         </table>
-        <!-- Pagination -->
         <nav
             class="flex gap-4 justify-center items-end py-2.5 mt-2.5  text-xs whitespace-nowrap border-t border-neutral-400"
             aria-label="Pagination">

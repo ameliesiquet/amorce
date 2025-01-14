@@ -14,6 +14,8 @@ class FundCard extends Component
 
     public Fonds $fund;
     public $search ='';
+    public $sortField = '';
+    public $sortAsc = true;
 
 
     public function mount(Fonds $fund)
@@ -53,6 +55,16 @@ class FundCard extends Component
         );
 
         return $highlighted;
+    }
+
+    public function sortBy($field)
+    {
+        if ($this->sortField === $field) {
+            $this->sortAsc = !$this->sortAsc;
+        } else {
+            $this->sortField = $field;
+            $this->sortAsc = true;
+        }
     }
 
     public function render()

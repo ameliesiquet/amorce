@@ -12,11 +12,4 @@ class Transactions extends Model
     protected $fillable = [
         'amount', 'transaction_type', 'status_type', 'created_at', 'fonds_id', 'id'
     ];
-
-
-    public function fonds()
-    {
-        return $this->belongsTo(Fonds::class, 'fonds_id', 'id', ['transactions'=>Transactions::paginate(3)]);
-    }
-
 }

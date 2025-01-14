@@ -1,4 +1,6 @@
-<!doctype html>
+@livewireStyles
+@livewireScripts
+    <!doctype html>
 <html lang="fr"
       class="h-full bg-gray-100">
 <head>

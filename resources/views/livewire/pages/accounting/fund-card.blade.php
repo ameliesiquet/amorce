@@ -11,7 +11,8 @@
                 <h4 class="text-lg font-semibold text-black md:text-base lg:text-lg">Transactions</h4>
                 <x-search-and-filter field="search" label="Rechercher une transaction"/>
             </div>
-            <x-fund-transactions :fund="$fund" :transactions="$this->transactions" :search="$this->search"></x-fund-transactions>
+            <x-fund-transactions :fund="$fund" :transactions="$transactions" :search="$search"></x-fund-transactions>
+
         </article>
 
         <div class="flex flex-wrap gap-8 items-end justify-between text-xs text-black md:gap-6 lg:gap-8">

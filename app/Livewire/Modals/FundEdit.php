@@ -33,6 +33,19 @@ class FundEdit extends Component
         $this->dispatch('close-modal');
     }
 
+    public function deleteFund()
+    {
+        $fund = Fonds::find($this->model);
+
+        if ($fund) {
+            $fund->delete();
+            redirect()->route('accounting');
+        }
+    }
+
+
+
+
     public function render()
     {
         return view('livewire.modals.fund-edit');
