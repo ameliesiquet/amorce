@@ -5,7 +5,7 @@
             <div class="flex gap-10 justify-between items-center w-full">
                 <h3 class="flex gap-1.5 items-center self-stretch my-auto">{{$specificFund->title}}</h3>
                 <div>
-                    <a href="" wire:click.prevent="openmodal('fund-edit', {{ $specificFund->id }})">
+                    <a href="" wire:click.prevent="openmodal('edit-fund', {{ $specificFund->id }})">
                         <x-icons.edit />
                     </a>
                 </div>

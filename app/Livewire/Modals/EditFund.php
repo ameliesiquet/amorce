@@ -6,7 +6,7 @@ use App\Livewire\Forms\EditFundForm;
 use App\Models\Fonds;
 use Livewire\Component;
 
-class FundEdit extends Component
+class EditFund extends Component
 {
 
     public Fonds $fund;
@@ -48,7 +48,7 @@ class FundEdit extends Component
 
     public function render()
     {
-        return view('livewire.modals.fund-edit');
+        return view('livewire.modals.edit-fund');
     }
 
 }

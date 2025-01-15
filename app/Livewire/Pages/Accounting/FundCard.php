@@ -24,7 +24,6 @@ class FundCard extends Component
     }
 
 
-
     #[Computed]
     public function transactions()
     {

@@ -9,7 +9,7 @@ Route::get('/meeting', \App\Livewire\Meeting::class)->name('meeting');
 Route::get('/newsletter', \App\Livewire\Newsletter::class)->name('newsletter');
 Route::get('/selection', \App\Livewire\Selection::class)->name('selection');
 
-Route::get('/fund/edit/{model}', \App\Livewire\Modals\FundEdit::class)->name('fund.edit');
+Route::get('/fund/edit/{model}', \App\Livewire\Modals\EditFund::class)->name('fund.edit');
 
 
 
