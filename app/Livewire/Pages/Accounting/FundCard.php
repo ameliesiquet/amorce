@@ -4,6 +4,7 @@ namespace App\Livewire\Pages\Accounting;
 
 use App\Models\Fonds;
 use Livewire\Attributes\Computed;
+use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -37,6 +38,12 @@ class FundCard extends Component
             })
             ->paginate(5);
     }
+    #[On('refresh-funds')]
+    public function refreshFunds(): void
+    {
+        $this->funds = Fonds::where('specific', false)->get();
+    }
+
 
     public function openmodal($which, $model = null): void
     {
@@ -80,8 +87,6 @@ class FundCard extends Component
 
         $total = $income - $expenses;
 
-
-
         $transactions = $this->fund->transactions()
             ->when($this->search, function ($query) {
                 $query->where(function ($query) {
@@ -90,6 +95,7 @@ class FundCard extends Component
                         ->orWhere('status_type', 'like', '%' . $this->search . '%');
                 });
             })
+            ->orderBy('created_at', 'desc')
             ->paginate(5);
 
         return view('livewire.pages.accounting.fund-card', [
@@ -98,6 +104,7 @@ class FundCard extends Component
             'income' => $income,
             'expenses' => $expenses,
             'total' => $total,
+            'amount' => $this->fund->transactions()->sum('amount'),
         ]);
     }
 

@@ -19,13 +19,11 @@ class Accounting extends Component
 
     public function mount(): void
     {
-        // Initiale Daten laden
         $this->funds = Fonds::where('specific', false)->get();
 
         $this->specificFunds = Fonds::where('specific', true)->get();
     }
 
-    // Event zum Refresh der Fonds-Daten
     public function refreshFunds()
     {
         $this->funds = Fonds::where('specific', false)->get();
@@ -35,7 +33,6 @@ class Accounting extends Component
 
     public function openmodal($which, $model = null): void
     {
-        // Nur Modal öffnen, ohne den Fonds zu ändern
         $this->dispatch('openmodal', $which, $model);
     }
 

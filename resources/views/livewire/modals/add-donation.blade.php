@@ -1,4 +1,4 @@
-<section x-data="{ isOpen: true }" @close-modal.window="isOpen = false">
+<section  x-data="{ isOpen: true }" @close-modal.window="isOpen = false">
     <div x-show="isOpen" class="relative z-10 " aria-labelledby="slide-over-title" role="dialog" aria-modal="true">
         <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
         <div class="fixed inset-0 overflow-hidden ">
@@ -21,29 +21,33 @@
                         <div class="flex h-full flex-col  items-center mx-auto shadow-xl mt-4">
                             <div class="flex flex-col gap-10 w-full max-w-xl">
                                 <h2 class="text-2xl font-semibold text-gray-800 text-left">Ajouter un don cash</h2>
-                                <form action="/" method="POST"
+                                <form
                                       class="flex flex-col gap-6 w-full px-8 py-10 rounded-3xl border border-solid border-black border-opacity-10 shadow-[0px_0px_4px_rgba(0,0,0,0.25)] max-md:px-5"
-                                      wire:submit.prevent="addFund">
+                                      wire:submit.prevent="addDonation"
+                                      >
                                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                     <div class="flex flex-col gap-2">
-                                        <label for="amount" class="block text-xl font-medium text-black">Date</label>
-                                        <input id="amount" name="amount" placeholder="24/11/24" required
+                                        <label for="date" class="block text-xl font-medium text-black">Date</label>
+                                        <input id="date" wire:model="created_at" type="text" placeholder="24/11/24" required
+                                               pattern="\d{2}/\d{2}/\d{2}" title="Format: d/m/y"
                                                class="mt-1 text-zinc-800 text-s block w-full border-t-0 border-l-0 border-r-0 border-b-1 border-b-gray-500 focus:border-b-amber-200 focus:outline-none focus:ring-white outline-none bg-transparent">
+
                                     </div>
                                     <div class="flex flex-col gap-2">
                                         <label for="amount" class="block text-xl font-medium text-black">Montant</label>
-                                        <input id="amount" name="amount" placeholder="300€" required
+                                        <input id="amount" wire:model="amount" placeholder="300€" required
                                                class="mt-1 text-zinc-800 text-s block w-full border-t-0 border-l-0 border-r-0 border-b-1 border-b-gray-500 focus:border-b-amber-200 focus:outline-none focus:ring-white outline-none bg-transparent">
                                     </div>
                                     <div class="flex flex-col gap-2">
                                         <label for="to-fund" class="block text-xl font-medium text-black">Vers</label>
-                                        <select id="to-fund" name="to_fund" required
+                                        <select id="to-fund" wire:model="fonds_id" required
                                                 class="mt-1 text-zinc-800 text-s block w-full border-t-0 border-l-0 border-r-0 border-b-1 border-b-gray-500 focus:border-b-amber-200 focus:outline-none focus:ring-white outline-none bg-transparent">
                                             @foreach ($funds as $fund)
                                                 <option value="{{ $fund->id }}">{{ $fund->title }}</option>
                                             @endforeach
                                         </select>
                                     </div>
+
                                     <div class="flex justify-between gap-10 items-start self-end mt-14 text-xs text-white whitespace-nowrap max-md:mt-10 self-center">
                                         <x-yellow-button class="flex justify-end">
                                             <x-icons.transfer-money/>
@@ -51,6 +55,7 @@
                                         </x-yellow-button>
                                     </div>
                                 </form>
+
                             </div>
                         </div>
                     </div>

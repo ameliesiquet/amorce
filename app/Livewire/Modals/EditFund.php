@@ -44,8 +44,6 @@ class EditFund extends Component
     }
 
 
-
-
     public function render()
     {
         return view('livewire.modals.edit-fund');
