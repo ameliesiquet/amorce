@@ -15,6 +15,7 @@ class AddDonation extends Component
     public $amount;
     public $created_at;
     public $fonds_id;
+    public $to_fund;
     public $funds = [];
     public AddDonationFund $form;
 
@@ -35,6 +36,7 @@ class AddDonation extends Component
         $this->form->amount = $this->amount;
         $this->form->created_at = $this->created_at;
         $this->form->fonds_id = $this->fonds_id;
+        $this->form->to_fund = $this->to_fund;
 
 
         $this->validate();

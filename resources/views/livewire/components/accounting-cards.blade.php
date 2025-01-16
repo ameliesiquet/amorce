@@ -14,7 +14,7 @@
                         @if($accCard['title'] == 'Revenus')
                             <x-icons.green-arrow-up/>
                         @elseif($accCard['title'] == 'Dépenses')
-                            <x-icons.red-arrow-down/> 
+                            <x-icons.red-arrow-down/>
                         @endif
                     </div>
                 </div>

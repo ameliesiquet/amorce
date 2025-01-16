@@ -19,7 +19,7 @@
                 <p class="mt-1.5 text-2xl font-semibold">{{$total}}€</p>
             </div>
             <div class="flex flex-col gap-4 justify-between items-end text-xs mt-auto">
-                    <a href="" wire:click.prevent="openmodal('make-transaction',{{$specificFund}})">
+                    <a href="" wire:click.prevent="openmodal('make-transaction',{{$specificFund->id}})">
                         <x-white-button>
                             <x-icons.transfer-money/>
                             Transférer

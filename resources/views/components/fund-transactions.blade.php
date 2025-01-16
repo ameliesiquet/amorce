@@ -20,7 +20,11 @@
                         {!! $this->highlight($transaction->transaction_type, $search) !!}
                     </td>
                     <td class="py-3 pr-2 sm:py-4 sm:px-2">
-                        {!! $this->highlight($transaction->amount . '€', $search) !!}
+                        @if($transaction->status_type == 'sortie')
+                            -{{ $transaction->amount }}€
+                        @else
+                            {{ $transaction->amount }}€
+                        @endif
                     </td>
                     <td class="py-3 pr-2 sm:py-4 sm:px-2 hidden sm:table-cell">
                         {!! $this->highlight($transaction->status_type, $search) !!}
@@ -35,6 +39,4 @@
             {{ $transactions->links() }}
         </nav>
     </div>
-
-
 </section>

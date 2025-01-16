@@ -9,6 +9,8 @@ class MakeTransactionForm extends Form
 {
     #[Validate]
     public $amount;
+    public string $title;
+
 
     public function mount()
     {
@@ -18,7 +20,8 @@ class MakeTransactionForm extends Form
     public function rules()
     {
         return [
-            'amount' => 'max:7|numeric',
+            'amount' => 'required|numeric|min:1',
+            'title' => 'required|max:50',
         ];
     }
 }

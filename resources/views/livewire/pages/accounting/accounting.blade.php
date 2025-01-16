@@ -10,7 +10,6 @@
                 Ajouter un fond
             </x-yellow-button>
         </a>
-
         <div class="flex gap-4">
             <a href="" wire:click.prevent="openmodal('add-donation')">
                 <x-white-button>
@@ -33,7 +32,6 @@
             <livewire:pages.accounting.fund-card :fund="$fund" wire:key="fund-{{ $fund->id }}"/>
         @endforeach
     </section>
-
 
     <livewire:pages.accounting.specific-funds/>
 </main>

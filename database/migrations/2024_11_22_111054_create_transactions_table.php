@@ -19,6 +19,11 @@ return new class extends Migration
             $table->timestamps();
             $table->unsignedBigInteger('fonds_id');
             $table->foreign('fonds_id')->references('id')->on('fonds')->onDelete('cascade');
+
+            $table->unsignedBigInteger('from_fund_id')->nullable();
+            $table->unsignedBigInteger('to_fund_id')->nullable();
+            $table->foreign('from_fund_id')->references('id')->on('fonds')->onDelete('cascade');
+            $table->foreign('to_fund_id')->references('id')->on('fonds')->onDelete('cascade');
         });
     }
 

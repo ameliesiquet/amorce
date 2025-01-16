@@ -21,7 +21,7 @@
         </article>
 
         <div class="flex flex-wrap gap-8 items-end justify-between text-xs text-black md:gap-6 lg:gap-8">
-            <a href="" wire:click.prevent="openmodal('make-transaction', {!! $fund !!})" class="text-xs">
+            <a href="" wire:click.prevent="openmodal('make-transaction', {{ $fund->id }})" class="text-xs">
                 <x-white-button>
                     <x-icons.transfer-money/>
                     Faire une transaction

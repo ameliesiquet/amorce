@@ -26,32 +26,29 @@
                                       wire:submit.prevent="makeTransaction"
                                       class="flex flex-col gap-6 w-full px-8 py-10 rounded-3xl border border-solid border-black border-opacity-10 shadow-[0px_0px_4px_rgba(0,0,0,0.25)] max-md:px-5">
                                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
-
                                     <div class="flex flex-col gap-2">
                                         <label for="from-fund" class="block text-xl font-medium text-black">De</label>
-                                        <select id="from-fund" name="from_fund" required
-                                                class="mt-1 block text-zinc-800 text-s w-full border-t-0 border-l-0 border-r-0 border-b-1 border-b-gray-500 focus:border-b-amber-200 focus:outline-none focus:ring-white outline-none bg-transparent">
-                                            @foreach ($funds as $fund)
-                                                <option value="{{ $fund->id }}">{{ $fund->title }}</option>
-                                            @endforeach
-                                        </select>
+                                        <input type="text" id="from-fund" name="from_fund" value="{{ $fund->title }}" readonly
+                                               class="mt-1 block text-zinc-800 text-s w-full border-t-0 border-l-0 border-r-0 border-b-1 border-b-gray-500 focus:border-b-amber-200 focus:outline-none focus:ring-white outline-none bg-transparent">
                                     </div>
 
                                     <div class="flex flex-col gap-2">
                                         <label for="to-fund" class="block text-xl font-medium text-black">Vers</label>
-                                        <select id="to-fund" name="to_fund" required
+                                        <select id="to-fund" name="to_fund" wire:model="form.to_fund" required
                                                 class="mt-1 text-zinc-800 text-s block w-full border-t-0 border-l-0 border-r-0 border-b-1 border-b-gray-500 focus:border-b-amber-200 focus:outline-none focus:ring-white outline-none bg-transparent">
+                                            <option value="1">Fond général</option>
                                             @foreach ($funds as $fund)
-                                                <option value="{{ $fund->id }}">{{ $fund->title }}</option>
+                                                @if($fund->title !== 'Fond général')
+                                                    <option value="{{ $fund->id }}">{{ $fund->title }}</option>
+                                                @endif
                                             @endforeach
                                         </select>
                                     </div>
 
                                     <div class="flex flex-col gap-2">
                                         <label for="amount" class="block text-xl font-medium text-black">Montant</label>
-                                        <input id="amount" name="amount" placeholder="300€" required
-                                               class="mt-1 text-zinc-800 text-s block w-full border-t-0 border-l-0 border-r-0 border-b-1 border-b-gray-500 focus:border-b-amber-200 focus:outline-none focus:ring-white outline-none bg-transparent"
-                                        >
+                                        <input id="amount" name="amount" wire:model.defer="form.amount"  placeholder="300€" required
+                                               class="mt-1 text-zinc-800 text-s block w-full border-t-0 border-l-0 border-r-0 border-b-1 border-b-gray-500 focus:border-b-amber-200 focus:outline-none focus:ring-white outline-none bg-transparent">
                                         @error('form.amount')
                                         <span class="text-red-500 text-sm mt-1">
                                             {{ $message }}
@@ -74,4 +71,3 @@
         </div>
     </div>
 </section>
-

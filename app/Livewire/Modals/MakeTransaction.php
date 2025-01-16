@@ -4,36 +4,70 @@ namespace App\Livewire\Modals;
 
 use App\Livewire\Forms\MakeTransactionForm;
 use App\Models\Fonds;
+use App\Models\Transaction;
+use App\Models\Transactions;
 use Livewire\Component;
 
 class MakeTransaction extends Component
 {
-    public $fund;
     public $funds;
     public $model;
-
-
-    public MakeTransactionForm $form;
+    public Fonds $fund;
     public $specificFund;
+    public MakeTransactionForm $form;
+    public $to_fund_id;
+    public $amount;
 
-
-    public function mount($fund = null, $specificFund = null)
+    public function mount($model = null): void
     {
-        $this->fund = $fund;
+        $this->model = $model;
+        $this->fund = Fonds::find($model);
         $this->funds = Fonds::all();
 
-        $this->specificFund = $specificFund;
+        if ($this->fund) {
+            $this->form->title = $this->fund->title;
+        }
     }
 
     public function makeTransaction(): void
     {
         $this->validate();
-        $data = $this->form->all();
-        $fund = Fonds::find($this->model);
-        $fund->update($data);
+
+        $amount = $this->form->amount;
+        $fromFundId = $this->fund->id;
+        $toFundId = $this->form->to_fund;
+
+        $fromFund = Fonds::find($fromFundId);
+        $toFund = Fonds::find($toFundId);
+
+
+        $fromFund->balance -= $amount;
+        $toFund->balance += $amount;
+
+        $fromFund->save();
+        $toFund->save();
+        $date = now();
+
+        Transactions::create([
+            'amount' => $amount,
+            'fonds_id' => $fromFundId,
+            'transaction_type' => 'Virement au' . $toFund->title,
+            'status_type' => 'sortie',
+            'created_at' => $date,
+        ]);
+
+        Transactions::create([
+            'amount' => $amount,
+            'fonds_id' => $toFundId,
+            'transaction_type' => 'Virement du' . $fromFund->title,
+            'status_type' => 'entrée',
+            'created_at' => $date,
+        ]);
+
         $this->dispatch('refresh-make-transaction');
         $this->dispatch('close-modal');
     }
+
 
     public function render()
     {
