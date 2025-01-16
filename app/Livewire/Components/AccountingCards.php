@@ -6,6 +6,9 @@ use App\Models\Fonds;
 class AccountingCards extends Component
 {
     public $accCards = [];
+    public $totalIncome;
+    public $totalExpenses;
+    public $totalFunds;
 
     public function mount()
     {

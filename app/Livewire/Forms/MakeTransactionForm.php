@@ -10,10 +10,17 @@ class MakeTransactionForm extends Form
     #[Validate]
     public $amount;
     public string $title;
+    public $from_fund;
+    public $to_fund;
 
 
-    public function mount()
+
+    public function mount($fund = null)
     {
+        if ($fund) {
+            $this->from_fund = $fund->id; // Initialisiere from_fund mit dem Fonds, von dem die Transaktion kommt
+            $this->title = $fund->title;
+        }
         app()->setLocale('fr');
     }
 

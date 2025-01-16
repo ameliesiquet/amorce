@@ -15,7 +15,10 @@ class MakeTransaction extends Component
     public Fonds $fund;
     public $specificFund;
     public MakeTransactionForm $form;
+
+    public $toFund;
     public $to_fund_id;
+    public $from_fund_title;
     public $amount;
 
     public function mount($model = null): void
@@ -25,6 +28,10 @@ class MakeTransaction extends Component
         $this->funds = Fonds::all();
 
         if ($this->fund) {
+            $this->form->from_fund = $this->fund->id;
+            $this->form->from_fund_title = $this->fund->title;
+            $this->form->to_fund = $this->fund->id;
+
             $this->form->title = $this->fund->title;
         }
     }
@@ -34,7 +41,7 @@ class MakeTransaction extends Component
         $this->validate();
 
         $amount = $this->form->amount;
-        $fromFundId = $this->fund->id;
+        $fromFundId = $this->form->from_fund;
         $toFundId = $this->form->to_fund;
 
         $fromFund = Fonds::find($fromFundId);
@@ -51,7 +58,7 @@ class MakeTransaction extends Component
         Transactions::create([
             'amount' => $amount,
             'fonds_id' => $fromFundId,
-            'transaction_type' => 'Virement au' . $toFund->title,
+            'transaction_type' => 'Virement au ' . $toFund->title,
             'status_type' => 'sortie',
             'created_at' => $date,
         ]);
@@ -59,7 +66,7 @@ class MakeTransaction extends Component
         Transactions::create([
             'amount' => $amount,
             'fonds_id' => $toFundId,
-            'transaction_type' => 'Virement du' . $fromFund->title,
+            'transaction_type' => 'Virement du ' . $fromFund->title,
             'status_type' => 'entrée',
             'created_at' => $date,
         ]);

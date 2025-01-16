@@ -27,6 +27,13 @@ class SpecificFundCard extends Component
     {
         $this->funds = Fonds::where('specific', true)->get();
     }
+
+    #[On('refresh-make-transaction')]
+    public function refresMakeTransaction(): void
+    {
+        $this->funds = Fonds::where('specific', false)->get();
+        $this->funds = Fonds::where('specific', true)->get();
+    }
     public function render()
     {
         $income = $this->specificFund->transactions()
