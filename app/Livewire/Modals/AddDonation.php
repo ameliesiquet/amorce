@@ -3,14 +3,11 @@
 namespace App\Livewire\Modals;
 
 use App\Livewire\Forms\AddDonationFund;
-use App\Livewire\Forms\EditFundForm;
 use App\Models\Fonds;
 use App\Models\Transactions;
 
-// Falls du das Transaction-Modell benutzt
 use Illuminate\Support\Carbon;
 use Livewire\Component;
-use Illuminate\Support\Facades\Log;
 
 
 class AddDonation extends Component

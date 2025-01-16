@@ -8,10 +8,14 @@
                     <time class="text-xs sm:text-sm text-gray-600">{{$accCard['time']}}</time>
                 </div>
                 <div class="flex gap-5 items-center mt-2 sm:mt-5">
-                    <p class="text-xl font-semibold text-black md:text-3xl lg:text:4xl">{{$accCard['value']}}€</p>
+                    <p class="text-xl font-semibold text-black md:text-3xl lg:text:4xl"> {{ number_format($accCard['value'], 2, ',', '.') }}€</p>
                     <div class="flex items-center gap-0.5 text-{{$accCard['color']}} md:gap-1.5">
                         <p class="text-l md:text:xl">{{ $accCard['percentage']}}%</p>
-                        <x-icons.green-arrow-up/>
+                        @if($accCard['title'] == 'Revenus')
+                            <x-icons.green-arrow-up/>
+                        @elseif($accCard['title'] == 'Dépenses')
+                            <x-icons.red-arrow-down/>  <!-- Hier wird der rote Pfeil angezeigt -->
+                        @endif
                     </div>
                 </div>
             </div>

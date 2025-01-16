@@ -2,6 +2,7 @@
 namespace App\Livewire\Pages\Accounting;
 
 use App\Models\Fonds;
+use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -13,9 +14,6 @@ class Accounting extends Component
     public $specificFunds;
     public $search = '';
 
-    protected $listeners = [
-        'refresh-funds' => 'refreshFunds',
-    ];
 
     public function mount(): void
     {
@@ -24,12 +22,7 @@ class Accounting extends Component
         $this->specificFunds = Fonds::where('specific', true)->get();
     }
 
-    public function refreshFunds()
-    {
-        $this->funds = Fonds::where('specific', false)->get();
-        $this->specificFunds = Fonds::where('specific', true)->get();
 
-    }
 
     public function openmodal($which, $model = null): void
     {
