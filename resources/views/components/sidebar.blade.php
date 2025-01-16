@@ -51,8 +51,18 @@
                     <div class="text-white group-hover:text-white group-active:text-white">Newsletter</div>
                 </a>
             </div>
+            <div class="mt-auto pl-8 pr-8 pt-2 pb-2 hover:bg-amber-200 hover:text-zinc-900 active:bg-amber-200">
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <button type="submit" class="text-white underline hover:text-zinc-900 w-full text-left">
+                        Déconnexion
+                    </button>
+                </form>
+            </div>
         </div>
+
     </aside>
+
 </nav>
 
 

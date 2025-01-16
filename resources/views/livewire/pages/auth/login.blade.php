@@ -24,11 +24,27 @@ new #[Layout('layouts.guest')] class extends Component
     }
 }; ?>
 
-<div>
+    <!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Login - Laravel</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.bunny.net">
+    <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet"/>
+
+    <!-- Styles -->
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+</head>
+<body class="bg-zinc-900 text-white h-screen flex items-center justify-center">
+
+<div class="bg-zinc-900 text-white h-screen flex items-center justify-center">
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
 
-    <form wire:submit="login">
+    <form wire:submit="login" class="bg-zinc-900 p-10 border border-amber-200 rounded-2xl text-white">
         <!-- Email Address -->
         <div>
             <x-input-label for="email" :value="__('Email')" />
@@ -41,9 +57,9 @@ new #[Layout('layouts.guest')] class extends Component
             <x-input-label for="password" :value="__('Password')" />
 
             <x-text-input wire:model="form.password" id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="current-password" />
+                          type="password"
+                          name="password"
+                          required autocomplete="current-password" />
 
             <x-input-error :messages="$errors->get('form.password')" class="mt-2" />
         </div>
@@ -69,3 +85,6 @@ new #[Layout('layouts.guest')] class extends Component
         </div>
     </form>
 </div>
+
+</body>
+</html>
