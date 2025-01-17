@@ -14,10 +14,10 @@ return new class extends Migration
         Schema::create('fonds', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->unsignedBigInteger('total')->default(0);
-            $table->unsignedBigInteger('expenses')->default(0);
-            $table->unsignedBigInteger('income')->default(0);
-            $table->boolean('specific')->default(false);
+            $table->unsignedBigInteger('total')->default(0.00);
+            $table->unsignedBigInteger('expenses')->default(0.00);
+            $table->unsignedBigInteger('income')->default(0.00);
+            $table->boolean('specific')->default(true);
             $table->timestamps();
         });
 

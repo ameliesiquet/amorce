@@ -12,5 +12,4 @@
             wire:model.live="{{$field}}"
         />
     </form>
-    <x-icons.filter/>
 </div>

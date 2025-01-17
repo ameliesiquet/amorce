@@ -12,7 +12,7 @@
                     <hr>
                 </div>
                 <div class="flex items-center justify-between pt-12 overflow-x-auto text-black">
-                    <table class="w-full text-black border border-gray-400">
+                    <table class="w-full text-black border border-gray-400 p-4">
                         <thead>
                         <tr>
                             <th>
