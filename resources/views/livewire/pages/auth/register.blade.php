@@ -41,11 +41,9 @@ new #[Layout('layouts.guest')] class extends Component {
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Login - Laravel</title>
 
-    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet"/>
 
-    <!-- Styles -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="bg-zinc-900 text-white h-screen flex items-center justify-center">
@@ -59,7 +57,6 @@ new #[Layout('layouts.guest')] class extends Component {
             <x-input-error :messages="$errors->get('name')" class="mt-2"/>
         </div>
 
-        <!-- Email Address -->
         <div class="mt-4">
             <x-input-label for="email" :value="__('Email')"/>
             <x-text-input wire:model="email" id="email" class="block mt-1 w-full" type="email" name="email" required
@@ -67,7 +64,6 @@ new #[Layout('layouts.guest')] class extends Component {
             <x-input-error :messages="$errors->get('email')" class="mt-2"/>
         </div>
 
-        <!-- Password -->
         <div class="mt-4">
             <x-input-label for="password" :value="__('Password')"/>
 
@@ -79,7 +75,6 @@ new #[Layout('layouts.guest')] class extends Component {
             <x-input-error :messages="$errors->get('password')" class="mt-2"/>
         </div>
 
-        <!-- Confirm Password -->
         <div class="mt-4">
             <x-input-label for="password_confirmation" :value="__('Confirm Password')"/>
 
@@ -94,8 +89,10 @@ new #[Layout('layouts.guest')] class extends Component {
             <x-primary-button class="ms-4">
                 {{ __('Register') }}
             </x-primary-button>
-            <p class="mt-4">Déja un compte ? <a href="{{ route('login') }}"
-                                                class="text-white underline hover:text-amber-200">Login</a></p>
+            <p class="mt-4">Déja un compte ?
+                <a href="{{ route('login') }}"
+                                                class="text-white underline hover:text-amber-200">Login</a>
+            </p>
 
 
         </div>
