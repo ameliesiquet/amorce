@@ -11,7 +11,7 @@
           content="ie=edge">
     <title>Document</title>
     <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css" rel="stylesheet" />
-    @vite(['resources/css/app.css'])
+    @vite(['resources/css/app.css'], ['resources/js/app.css'])
 </head>
 <body class="font-sans antialiased flex h-screen">
 <!-- Header -->
