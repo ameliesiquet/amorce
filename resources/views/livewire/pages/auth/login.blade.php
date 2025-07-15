@@ -27,68 +27,47 @@ new #[Layout('layouts.guest')] class extends Component
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
 
-<<<<<<< Updated upstream
-    <form wire:submit="login" class="bg-zinc-900 p-10 border border-amber-200 rounded-2xl text-white">
         <!-- Email Address -->
-=======
-    <form wire:submit.prevent="login" class="bg-zinc-900 p-10 border border-amber-200 rounded-2xl text-white">
+    <form wire:submit.prevent="login" class="bg-zinc-900 p-10 border border-amber-200 rounded-2xl text-white flex flex-col gap-4">
         @csrf
->>>>>>> Stashed changes
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input wire:model="form.email" id="email" class="block mt-1 w-full" type="email" name="email" required autofocus autocomplete="username" />
-            <x-input-error :messages="$errors->get('form.email')" class="mt-2" />
-        </div>
-
+        <!-- Email -->
+        <x-form.field-label-input
+            label="Email"
+            name="form.email"
+            type="email"
+            model="form.email"
+            placeholder="your-email@gmail.com"
+            autocomplete="email"
+            autofocus
+            class="lowercase"
+        />
         <!-- Password -->
-        <div class="mt-4">
-<<<<<<< Updated upstream
-            <x-input-label for="password" :value="__('Password')" />
-
-            <x-text-input wire:model="form.password" id="password" class="block mt-1 w-full"
-                          type="password"
-                          name="password"
-                          required autocomplete="current-password" />
-
-            <x-input-error :messages="$errors->get('form.password')" class="mt-2" />
-=======
-            <x-input-label for="password" :value="__('Password')"/>
-            <x-text-input wire:model="form.password" id="password" class="block mt-1 w-full" type="password"
-                          name="password" required autocomplete="current-password"/>
-            <x-input-error :messages="$errors->get('form.password')" class="mt-2"/>
->>>>>>> Stashed changes
+        <div class="flex flex-col gap-3">
+            <x-form.input-password
+                label="Password"
+                name="form.password"
+                :model="'form.password'"
+                autocomplete="current-password"
+            />
+            <!-- Remember Me -->
+            <div class="block mt-2">
+                <label for="remember" class="inline-flex items-center">
+                    <input wire:model="form.remember" id="remember" type="checkbox" class="rounded border-gray-300 " name="remember">
+                    <span class="ms-2 text-sm text-gray-300">{{ __('Remember me') }}</span>
+                </label>
+            </div>
         </div>
-
-        <!-- Remember Me -->
-        <div class="block mt-4">
-            <label for="remember" class="inline-flex items-center">
-<<<<<<< Updated upstream
-                <input wire:model="form.remember" id="remember" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="remember">
-                <span class="ms-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
-=======
-                <input wire:model="form.remember" id="remember" type="checkbox"
-                       class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="remember">
-                <span class="ms-2 text-sm text-gray-50">{{ __('Remember me') }}</span>
->>>>>>> Stashed changes
-            </label>
-        </div>
-
-        <div class="flex items-center justify-end mt-4">
+        <div >
             @if (Route::has('password.request'))
-<<<<<<< Updated upstream
-                <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}" wire:navigate>
-=======
-                <a class="underline text-sm text-white hover:text-amber-200 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                <a class="underline text-sm text-white hover:text-amber-200 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 "
                    href="{{ route('password.request') }}" wire:navigate>
->>>>>>> Stashed changes
                     {{ __('Forgot your password?') }}
                 </a>
             @endif
-
-            <x-primary-button class="ms-3">
-                {{ __('Log in') }}
-            </x-primary-button>
         </div>
+        <x-buttons.primary-button class="ms-3">
+            {{ __('Log in') }}
+        </x-buttons.primary-button>
     </form>
 </div>
 

@@ -37,16 +37,16 @@ new #[Layout('layouts.guest')] class extends Component {
         <form wire:submit="sendPasswordResetLink" class="flex flex-col gap-2">
             <!-- Email Address -->
             <div>
-                <x-input-label for="email" :value="__('Email')"/>
-                <x-text-input wire:model="email" id="email" class="block mt-1 w-full" type="email" name="email" required
+                <x-form.input-label for="email" :value="__('Email')"/>
+                <x-form.text-input wire:model="email" id="email" class="block mt-1 w-full" type="email" name="email" required
                               autofocus/>
-                <x-input-error :messages="$errors->get('email')" class="mt-2"/>
+                <x-form.input-error :messages="$errors->get('email')" class="mt-2"/>
             </div>
 
             <div class="flex items-center justify-start mt-4">
-                <x-primary-button>
+                <x-buttons.primary-button>
                     {{ __('Email Password Reset Link') }}
-                </x-primary-button>
+                </x-buttons.primary-button>
             </div>
             <!-- Session Status -->
             <x-auth-session-status class="mb-4" :status="session('status')"/>
