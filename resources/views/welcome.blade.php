@@ -12,22 +12,32 @@
     <!-- Styles -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="bg-zinc-900 text-white h-screen flex items-center justify-center">
+<body class="bg-zinc-900 text-white h-screen flex flex-col gap-20">
 
 @if (Auth::check())
     <script>
         window.location.href = "{{ route('dashboard') }}";
     </script>
 @else
-    <div class="flex flex-col gap-4 bg-zinc-900 text-white p-8 rounded-lg border border-amber-200 shadow-lg w-full max-w-sm text-center self-center">
-        <h1 class="text-xl font-semibold mb-4">Bienvenue!</h1>
-        <p>Veuillez vous connecter pour accéder à votre tableau de bord.</p>
+    <div class="hidden align-end lg:w-full lg:bg-amber-200 lg:pt-10 lg:pb-6 lg:flex lg:justify-center">
+        <img src="{{ asset('img/logo.png') }}" alt="Logo" class="h-auto max-w-full">
+    </div>
 
-        <a href="{{ route('login') }}" class="w-full py-2 px-4 bg-amber-200 text-zinc-900 rounded-md hover:bg-amber-300 focus:outline-none focus:ring-2 focus:ring-amber-200">
-            Se connecter
+    <div
+        class="flex flex-col gap-6 bg-zinc-900 text-white p-8 rounded-lg border border-amber-200 shadow-lg w-full max-w-sm text-center self-center lg:mt-20">
+        <h1 class="text-xl font-semibold">Bienvenue!</h1>
+        <div class="flex flex-col gap-4">
+            <p>Veuillez vous connecter pour accéder à votre tableau de bord.</p>
+
+            <a href="{{ route('login') }}"
+               class="w-full py-2 px-4 bg-amber-200 text-zinc-900 rounded-md hover:bg-amber-300 focus:outline-none focus:ring-2 focus:ring-amber-200">
+                Se connecter
+            </a>
+        </div>
+        <a href="{{ route('password.request') }}"
+           class="text-xs text-white hover:text-amber-200 underline ">
+            {{ __('Forgot your password?') }}
         </a>
-
-        <p class="mt-4">Pas encore de compte ? <a href="{{ route('register') }}" class="text-white underline hover:text-amber-200">Inscrivez-vous</a></p>
     </div>
 
 @endif

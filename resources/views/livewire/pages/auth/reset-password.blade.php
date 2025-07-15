@@ -69,7 +69,7 @@ new #[Layout('layouts.guest')] class extends Component
     }
 }; ?>
 
-<div>
+<section class="bg-zinc-900 text-white h-screen flex items-center justify-center">
     <form wire:submit="resetPassword">
         <!-- Email Address -->
         <div>
@@ -102,4 +102,4 @@ new #[Layout('layouts.guest')] class extends Component
             </x-primary-button>
         </div>
     </form>
-</div>
+</section>
