@@ -20,10 +20,10 @@
             </div>
             <div class="flex flex-col gap-4 justify-between items-end text-xs mt-auto">
                     <a href="" wire:click.prevent="openmodal('make-transaction',{{$specificFund->id}})">
-                        <x-white-button>
+                        <x-buttons.white-button>
                             <x-icons.transfer-money/>
                             Transférer
-                        </x-white-button>
+                        </x-buttons.white-button>
                     </a>
             </div>
         </div>

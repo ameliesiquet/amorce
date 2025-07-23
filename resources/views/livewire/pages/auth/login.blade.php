@@ -23,7 +23,7 @@ new #[Layout('layouts.guest')] class extends Component
 
 <section class="bg-zinc-900 text-white h-screen flex items-center justify-center">
 
-<div class="bg-zinc-900 text-white h-screen flex items-center justify-center">
+<div class="bg-zinc-900 text-white h-screen flex flex-col items-center justify-center">
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
 

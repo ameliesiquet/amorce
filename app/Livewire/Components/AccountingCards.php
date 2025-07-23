@@ -10,11 +10,19 @@ class AccountingCards extends Component
     public $totalExpenses;
     public $totalFunds;
 
+    protected $listeners = ['refresh-funds' => 'loadData']; // 👈 Das ergänzt du
+
     public function mount()
+    {
+        $this->loadData(); // 👈 Logik ausgelagert
+    }
+
+    public function loadData()
     {
         $totalIncome = Fonds::all()->sum(function($fund) {
             return $fund->transactions()->where('status_type', 'entrée')->sum('amount');
         });
+
         $totalExpenses = Fonds::all()->sum(function($fund) {
             return $fund->transactions()->where('status_type', 'sortie')->sum('amount');
         });
@@ -41,7 +49,6 @@ class AccountingCards extends Component
                 'percentage' => round($expensesPercentage, 2),
                 'color' => 'red-600',
             ],
-
         ];
     }
 
@@ -50,3 +57,4 @@ class AccountingCards extends Component
         return view('livewire.components.accounting-cards');
     }
 }
+

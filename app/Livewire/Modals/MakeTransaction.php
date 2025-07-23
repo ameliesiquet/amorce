@@ -13,12 +13,8 @@ class MakeTransaction extends Component
     public $funds;
     public $model;
     public Fonds $fund;
-    public $specificFund;
     public MakeTransactionForm $form;
 
-    public $toFund;
-    public $to_fund_id;
-    public $from_fund_title;
     public $amount;
 
     public function mount($model = null): void
@@ -47,12 +43,14 @@ class MakeTransaction extends Component
         $fromFund = Fonds::find($fromFundId);
         $toFund = Fonds::find($toFundId);
 
+        $balance = $fromFund->transactions()->where('status_type', 'entrée')->sum('amount') -
+            $fromFund->transactions()->where('status_type', 'sortie')->sum('amount');
 
-        $fromFund->balance -= $amount;
-        $toFund->balance += $amount;
+        if ($amount > $balance) {
+            $this->addError('form.amount', 'Fonds „' . $fromFund->title . '“ n‘a pas assez d‘argent sur le compte (il restent ' . number_format($balance, 2) . ' € ).');
+            return;
+        }
 
-        $fromFund->save();
-        $toFund->save();
         $date = now();
 
         Transactions::create([

@@ -47,15 +47,13 @@
                                             @endforeach
                                         </select>
                                     </div>
-
-                                    <div class="flex justify-between gap-10 items-start self-end mt-14 text-xs text-white whitespace-nowrap max-md:mt-10 self-center">
-                                        <x-yellow-button class="flex justify-end">
+                                    <div class="flex justify-end mt-4">
+                                        <x-buttons.yellow-buttcon wire:loading.attr="disabled">
                                             <x-icons.transfer-money/>
-                                            <p>ajouter le don</p>
-                                        </x-yellow-button>
+                                            ajouter le don
+                                        </x-buttons.yellow-buttcon>
                                     </div>
                                 </form>
-
                             </div>
                         </div>
                     </div>

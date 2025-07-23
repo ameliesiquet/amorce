@@ -44,11 +44,11 @@ class FundCard extends Component
         $this->funds = Fonds::where('specific', false)->get();
     }
     #[On('refresh-make-transaction')]
-    public function refresMakeTransaction(): void
+    public function refreshMakeTransaction(): void
     {
-        $this->funds = Fonds::where('specific', false)->get();
-        $this->funds = Fonds::where('specific', true)->get();
+        $this->fund = Fonds::find($this->fund->id);
     }
+
 
 
     public function openmodal($which, $model = null): void

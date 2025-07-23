@@ -4,25 +4,28 @@
 
     <section class="flex flex-wrap gap-4 lg:gap-8 sm:justify-between items-center m-auto sm:m-0">
         <h2 class="hidden">Buttons</h2>
-        <a href="" wire:click.prevent="openmodal('create-fund')">
-            <x-yellow-button>
-                <x-icons.add/>
-                Ajouter un fond
-            </x-yellow-button>
-        </a>
-        <div class="flex gap-4">
+            <a href="" wire:click.prevent="openmodal('create-fund')">
+                <x-buttons.yellow-button>
+                    <x-icons.add/>
+                    <p>
+                        Ajouter un fond
+                    </p>
+                </x-buttons.yellow-button>
+            </a>
+
+            <div class="flex gap-4">
             <a href="" wire:click.prevent="openmodal('add-donation')">
-                <x-white-button>
+                <x-buttons.white-button>
                     <x-icons.add/>
                     <p>
                         Ajouter un don cash
                     </p>
-                </x-white-button>
+                </x-buttons.white-button>
             </a>
-            <x-yellow-button>
+            <x-buttons.yellow-button>
                 <x-icons.import/>
                 Importer un fichier CSV
-            </x-yellow-button>
+            </x-buttons.yellow-button>
         </div>
 
     </section>

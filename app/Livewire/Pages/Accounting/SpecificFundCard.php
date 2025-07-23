@@ -29,11 +29,11 @@ class SpecificFundCard extends Component
     }
 
     #[On('refresh-make-transaction')]
-    public function refresMakeTransaction(): void
+    public function refreshMakeTransaction(): void
     {
-        $this->funds = Fonds::where('specific', false)->get();
-        $this->funds = Fonds::where('specific', true)->get();
+        $this->specificFund = Fonds::find($this->specificFund->id);
     }
+
     public function render()
     {
         $income = $this->specificFund->transactions()

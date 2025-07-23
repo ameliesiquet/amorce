@@ -42,9 +42,9 @@
                                         @enderror
                                     </div>
                                     <div class="flex w-full justify-between mt-4">
-                                        <x-yellow-button>
+                                        <x-buttons.yellow-button>
                                             <p>enregistrer</p>
-                                        </x-yellow-button>
+                                        </x-buttons.yellow-button>
                                     </div>
                                 </form>
 
