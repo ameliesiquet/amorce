@@ -9,8 +9,9 @@ use Livewire\Component;
 class SpecificFundCard extends Component
 {
     public Fonds $specificFund;
-    public $search ='';
-
+    public $search = '';
+    public $modal = null;
+    public $modalParams = null;
     public function mount(Fonds $fund)
     {
         $this->specificFund = $fund;
@@ -18,9 +19,19 @@ class SpecificFundCard extends Component
 
     public function openmodal($which, $modelId = null): void
     {
-        $this->dispatch('openmodal', $which, $modelId);
+        $this->modal = $which;
+        $this->modalParams = [
+            'id' => $modelId,
+            'timestamp' => now()->timestamp,
+        ];
     }
 
+    #[On('close-modal')]
+    public function handleCloseModal()
+    {
+        $this->modal = null;
+        $this->modalParams = null;
+    }
 
     #[On('refresh-specific-funds')]
     public function refreshFunds(): void

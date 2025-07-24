@@ -18,6 +18,8 @@ class FundCard extends Component
     public $sortField = '';
     public $sortAsc = true;
 
+    public $modal = null;
+    public $modalParams = null;
 
     public function mount(Fonds $fund)
     {
@@ -53,8 +55,24 @@ class FundCard extends Component
 
     public function openmodal($which, $model = null): void
     {
-        $this->dispatch('openmodal', $which, $model);
+        $this->modal = $which;
+        $this->modalParams = [
+            'id' => $model,
+            'timestamp' => now()->timestamp,
+        ];
     }
+
+    public function closeModal(): void
+    {
+        $this->modal = null;
+        $this->modalParams = null;
+    }
+    #[On('close-modal')]
+    public function handleCloseModal()
+    {
+        $this->closeModal();
+    }
+
 
     public function highlight($text, $search)
     {

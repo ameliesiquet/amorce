@@ -1,22 +1,17 @@
-<section
-    x-data="{ open: $wire.entangle('showModal') }"
-    x-show="open"
-    style="display: none;"
->
-    <div @wire:loading.remove class="relative z-10" aria-modal="true">
-        <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
-        <div class="fixed inset-0 overflow-hidden">
+<section x-data="{ isOpen: true }" @close-modal.window="isOpen = false">
+    <div x-show="isOpen" class="relative z-10" aria-labelledby="slide-over-title" role="dialog" aria-modal="true">
+        <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
+        <div class="fixed inset-0 overflow-hidden p-4">
             <div class="absolute inset-0 overflow-hidden">
                 <div class="pointer-events-none fixed inset-y-0 right-0 flex pl-10">
                     <div class="pointer-events-auto relative w-screen max-w-screen-md bg-white">
-                        <div class="flex p-6 justify-end">
-                            <button
-                                @click="$wire.close()"
-                                type="button"
-                                class="rounded-md text-gray-400 hover:text-gray-600 focus:outline-none"
-                            >
+                        <div class="flex p-6 mt-10 lg:mt-0">
+                            <button @click="isOpen = false" type="button"
+                                    class="relative rounded-md text-gray-300 hover:text-white focus:outline-none focus:ring-2 focus:ring-white">
+                                <span class="absolute -inset-2.5"></span>
+                                <span class="sr-only">Close panel</span>
                                 <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                                     stroke="currentColor" aria-hidden="true">
+                                     stroke="#000000" aria-hidden="true">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"/>
                                 </svg>
                             </button>
@@ -27,6 +22,7 @@
 
                                 <form wire:submit.prevent="createFund"
                                       class="flex flex-col gap-6 w-full px-8 py-10 rounded-3xl border border-black border-opacity-10 shadow">
+                                    @csrf
                                     <div class="flex flex-col gap-3 w-full">
                                         <label for="fund-name" class="block text-xl font-medium text-black">
                                             Nom
@@ -34,7 +30,7 @@
                                         <input id="fund-name"
                                                type="text"
                                                wire:model.defer="title"
-                                               class="border-b border-gray-500 focus:border-amber-500 focus:outline-none bg-transparent">
+                                               class="border-b border-gray-500 focus:border-amber-500 focus:outline-none bg-transparent rounded-lg">
                                         @error('title')
                                         <span class="text-red-500 text-sm">{{ $message }}</span>
                                         @enderror

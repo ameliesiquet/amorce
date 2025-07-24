@@ -37,4 +37,17 @@
     </section>
 
     <livewire:pages.accounting.specific-funds/>
+    @if ($modal === 'add-donation')
+        <livewire:modals.add-donation
+            :funds="$funds"
+            :key="'add-donation-modal-' . ($modalParams['timestamp'] ?? now()->timestamp)"
+        />
+    @endif
+
+    @if ($modal === 'create-fund')
+        <livewire:modals.create-fund
+            :key="'create-fund-modal-' . ($modalParams['timestamp'] ?? now()->timestamp)"
+        />
+    @endif
+
 </main>

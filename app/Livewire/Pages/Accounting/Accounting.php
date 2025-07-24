@@ -3,6 +3,7 @@
 namespace App\Livewire\Pages\Accounting;
 
 use App\Models\Fonds;
+use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -13,11 +14,27 @@ class Accounting extends Component
     public $search = '';
 
     protected $listeners = ['fundCreated' => '$refresh'];
+    public $isOpen = false;
+    public $modal = null;
+    public $modalParams = null;
 
-    public function openmodal($which, $model = null): void
+
+    public function openmodal($which, $modelId = null): void
     {
-        $this->dispatch('openmodal', $which, $model);
+        $this->modal = $which;
+        $this->modalParams = [
+            'id' => $modelId,
+            'timestamp' => now()->timestamp,
+        ];
     }
+
+    #[On('close-modal')]
+    public function handleCloseModal()
+    {
+        $this->modal = null;
+        $this->modalParams = null;
+    }
+
 
     public function render()
     {

@@ -12,15 +12,17 @@ class MakeTransaction extends Component
 {
     public $funds;
     public $model;
-    public Fonds $fund;
+    public ?Fonds $fund = null;
+
     public MakeTransactionForm $form;
 
     public $amount;
 
+
     public function mount($model = null): void
     {
         $this->model = $model;
-        $this->fund = Fonds::find($model);
+        $this->fund = Fonds::findOrFail($model);
         $this->funds = Fonds::all();
 
         if ($this->fund) {

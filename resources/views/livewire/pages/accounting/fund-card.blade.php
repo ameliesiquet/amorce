@@ -23,4 +23,12 @@
             </a>
         </div>
     </div>
+    @if ($modal === 'make-transaction')
+        <livewire:modals.make-transaction
+            :model="$modalParams['id']"
+            :key="'transaction-'.$modalParams['id'].'-'.$modalParams['timestamp']"
+        />
+    @endif
+
+
 </section>

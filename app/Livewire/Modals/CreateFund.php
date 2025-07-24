@@ -34,12 +34,12 @@ class CreateFund extends Component
 
         Fonds::create([
             'title' => $this->title,
-            'specific' => true, // oder false, je nach Kontext
+            'specific' => true,
         ]);
 
         $this->dispatch('fundCreated');
         $this->dispatch('refresh-specific-funds');
-
+        $this->dispatch('close-modal');
         $this->reset(['title', 'showModal']);
     }
 
