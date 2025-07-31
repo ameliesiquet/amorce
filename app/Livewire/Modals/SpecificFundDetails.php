@@ -3,11 +3,14 @@ namespace App\Livewire\Modals;
 
 use App\Livewire\Pages\Accounting\SpecificFunds;
 use App\Models\Fonds;
+use Livewire\Attributes\Computed;
 use Livewire\Attributes\On;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class SpecificFundDetails extends Component
 {
+    use WithPagination;
     public Fonds $specificFund;
     public $showModal = true;
     public $search = '';
@@ -42,6 +45,20 @@ class SpecificFundDetails extends Component
         $this->showModal = true;
     }
 
+    public function highlight($text, $search)
+    {
+        if (!$search) {
+            return e($text);
+        }
+
+        $highlighted = preg_replace(
+            '/(' . preg_quote($search, '/') . ')/i',
+            '<span class="text-black-500 font-bold underline ">$1</span>',
+            e($text)
+        );
+
+        return $highlighted;
+    }
 
     public function render()
     {

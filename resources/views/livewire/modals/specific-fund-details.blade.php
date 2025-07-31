@@ -1,4 +1,4 @@
-<section x-data="{ isOpen: @entangle('showModal') }" x-show="isOpen" @close-modal.window="isOpen = false" x-cloak>
+<section x-data  x-show="$wire.showModal" @close-modal.window="$wire.showModal = false" x-cloak>
 
 <div class="fixed inset-0 z-50 bg-gray-500 bg-opacity-50 flex justify-center items-center">
         <div class="bg-white rounded-3xl shadow-xl w-full max-w-4xl p-8 relative">
@@ -16,7 +16,7 @@
                 </svg>
             </button>
 
-            {{-- Fund-Info --}}
+
             <div class="flex flex-col mx-2 sm:mx-2 gap-2 px-8 py-5 bg-white rounded-3xl border border-solid border-black border-opacity-10  2xl:justify-between shadow-[0px_0px_4px_rgba(0,0,0,0.2)] md:px-12 md:py-10  2xl:px-12">
                 <div class="flex flex-col gap-5 justify-center sm:w-full  sm:mx-auto text-xl font-semibold text-black md:text-lg lg:text-xl">
                     <h3 class="flex gap-1.5 items-center self-stretch my-auto">{{ $specificFund->title }}</h3>
@@ -31,15 +31,6 @@
                     </div>
                     <x-accounting.fund-transactions :fund="$specificFund" :transactions="$transactions" :search="$search"></x-accounting.fund-transactions>
                 </article>
-
-                <div class="flex flex-wrap gap-8 items-end justify-between text-xs text-black md:gap-6 lg:gap-8">
-                    <a href="" wire:click.prevent="openmodal('make-transaction', {{ $specificFund->id }})" class="text-xs">
-                        <x-buttons.white-button>
-                            <x-icons.transfer-money/>
-                            Transférer
-                        </x-buttons.white-button>
-                    </a>
-                </div>
             </div>
         </div>
     </div>
