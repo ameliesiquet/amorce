@@ -51,8 +51,6 @@ class FundCard extends Component
         $this->fund = Fonds::find($this->fund->id);
     }
 
-
-
     public function openmodal($which, $model = null): void
     {
         $this->modal = $which;
@@ -131,8 +129,4 @@ class FundCard extends Component
             'amount' => $this->fund->transactions()->sum('amount'),
         ]);
     }
-
-
-
-
 }

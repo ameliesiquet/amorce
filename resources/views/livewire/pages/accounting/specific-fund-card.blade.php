@@ -1,10 +1,11 @@
 <article
-    class="flex flex-col justify-center self-stretch px-8 py-9 my-auto bg-white rounded-3xl border border-solid border-black border-opacity-10 min-h-[231px] shadow-[0px_0px_4px_rgba(0,0,0,0.2)] max-md:px-5">
+    class="flex flex-col justify-center self-stretch px-8 py-9 my-auto bg-white rounded-3xl cursor-pointer border border-solid border-black border-opacity-10 min-h-[231px] shadow-[0px_0px_4px_rgba(0,0,0,0.2)] max-md:px-5"
+    wire:click.prevent="openmodal('specific-fund-details', {{ $specificFund->id }})">
     <div class="flex flex-col justify-center w-full text-2xl font-semibold">
         <div class="flex gap-10 justify-between items-center w-full">
             <h3 class="flex gap-1.5 items-center self-stretch my-auto">{{$specificFund->title}}</h3>
             <div>
-                <a href="" wire:click.prevent="openmodal('edit-fund', {{ $specificFund->id }})">
+                <a href="#" wire:click.stop.prevent="openmodal('edit-fund', {{ $specificFund->id }})">
                     <x-icons.edit/>
                 </a>
             </div>
@@ -18,7 +19,7 @@
             <p class="mt-1.5 text-2xl font-semibold">{{$total}}€</p>
         </div>
         <div class="flex flex-col gap-4 justify-between items-end text-xs mt-auto">
-            <a href="" wire:click.prevent="openmodal('make-transaction',{{$specificFund->id}})">
+            <a href="#" wire:click.stop.prevent="openmodal('make-transaction', {{ $specificFund->id }})">
                 <x-buttons.white-button>
                     <x-icons.transfer-money/>
                     Transférer
@@ -32,5 +33,16 @@
             :key="'make-'.$modalParams['id'].'-'.$modalParams['timestamp']"
         />
     @endif
-
+    @if ($modal === 'edit-fund')
+        <livewire:modals.edit-fund
+            :model="$modalParams['id']"
+            :key="'edit-fund-'.$modalParams['id'].'-'.$modalParams['timestamp']"
+        />
+    @endif
+    @if ($modal === 'specific-fund-details' && $modalParams['id'] == $specificFund->id)
+        <livewire:modals.specific-fund-details
+            :model="$modalParams['id']"
+            :key="'specific-fund-details-' . $modalParams['id']"
+        />
+    @endif
 </article>

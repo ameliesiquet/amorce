@@ -13,6 +13,21 @@ class EditFund extends Component
     public $model;
     public EditFundForm $form;
 
+    protected $listeners = ['openmodal' => 'handleOpenModal'];
+
+    public function handleOpenModal($modal)
+    {
+        if ($modal === 'edit-fund') {
+            $this->showModal = true;
+        }
+    }
+
+    public function close()
+    {
+        $this->showModal = false;
+    }
+
+
     public function mount($model = null): void
     {
         $this->model = $model;
@@ -31,6 +46,7 @@ class EditFund extends Component
         $fund->update($data);
         $this->dispatch('refresh-specific-funds');
         $this->dispatch('close-modal');
+        $this->reset(['title', 'showModal']);
     }
 
     public function deleteFund()

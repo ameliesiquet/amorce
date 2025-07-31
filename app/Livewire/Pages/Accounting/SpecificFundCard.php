@@ -12,6 +12,15 @@ class SpecificFundCard extends Component
     public $search = '';
     public $modal = null;
     public $modalParams = null;
+
+    protected $listeners = ['close-modal' => 'closeModal'];
+
+    public function closeModal()
+    {
+        $this->modal = null;
+        $this->modalParams = null;
+    }
+
     public function mount(Fonds $fund)
     {
         $this->specificFund = $fund;
@@ -24,7 +33,13 @@ class SpecificFundCard extends Component
             'id' => $modelId,
             'timestamp' => now()->timestamp,
         ];
+        if ($which === 'specific-fund-details') {
+            $this->dispatch('modal-opened', which: $which, id: $modelId);
+        }
     }
+
+
+
 
     #[On('close-modal')]
     public function handleCloseModal()
@@ -56,6 +71,17 @@ class SpecificFundCard extends Component
             ->sum('amount');
 
         $total = $income - $expenses;
+
+        $transactions = $this->specificFund->transactions()
+            ->when($this->search, function ($query) {
+                $query->where(function ($query) {
+                    $query->where('transaction_type', 'like', '%' . $this->search . '%')
+                        ->orWhere('amount', 'like', '%' . $this->search . '%')
+                        ->orWhere('status_type', 'like', '%' . $this->search . '%');
+                });
+            })
+            ->orderBy('created_at', 'desc')
+            ->paginate(5);
 
         return view('livewire.pages.accounting.specific-fund-card', [
             'search' => $this->search,

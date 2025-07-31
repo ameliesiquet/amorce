@@ -4,16 +4,16 @@
 
     <section class="flex flex-wrap gap-4 lg:gap-8 sm:justify-between items-center m-auto sm:m-0">
         <h2 class="hidden">Buttons</h2>
-            <a href="" wire:click.prevent="openmodal('create-fund')">
-                <x-buttons.yellow-button>
-                    <x-icons.add/>
-                    <p>
-                        Ajouter un fond
-                    </p>
-                </x-buttons.yellow-button>
-            </a>
+        <a href="" wire:click.prevent="openmodal('create-fund')">
+            <x-buttons.yellow-button>
+                <x-icons.add/>
+                <p>
+                    Ajouter un fond
+                </p>
+            </x-buttons.yellow-button>
+        </a>
 
-            <div class="flex gap-4">
+        <div class="flex gap-4">
             <a href="" wire:click.prevent="openmodal('add-donation')">
                 <x-buttons.white-button>
                     <x-icons.add/>
@@ -22,12 +22,13 @@
                     </p>
                 </x-buttons.white-button>
             </a>
-            <x-buttons.yellow-button>
-                <x-icons.import/>
-                Importer un fichier CSV
-            </x-buttons.yellow-button>
+            <a href="" wire:click.prevent="openmodal('import-csv')">
+                <x-buttons.yellow-button>
+                    <x-icons.import/>
+                    <p>Importer un fichier CSV</p>
+                </x-buttons.yellow-button>
+            </a>
         </div>
-
     </section>
 
     <section class="grid grid-cols-1 2xl:grid-cols-2 gap-6">
@@ -49,5 +50,13 @@
             :key="'create-fund-modal-' . ($modalParams['timestamp'] ?? now()->timestamp)"
         />
     @endif
+
+    @if ($modal === 'specific-fund-details')
+        <livewire:modals.specific-fund-details
+            :model="$modalParams['id']"
+            :key="'details-' . $modalParams['id'] . '-' . $modalParams['timestamp']"
+        />
+    @endif
+
 
 </main>
