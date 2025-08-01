@@ -64,14 +64,4 @@
             </div>
         </div>
     </div>
-    <div x-data="{ shouldRedirect: @entangle('redirect') }"
-         x-init="$watch('shouldRedirect', value => {
-         if (value) {
-             setTimeout(() => {
-    window.location.reload();
-}, 300);
-         }
-     })">
-    </div>
-
 </section>

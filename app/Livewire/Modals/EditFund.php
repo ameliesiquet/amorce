@@ -21,6 +21,8 @@ use Livewire\Component;
         'openmodal' => 'handleOpenModal',
         'close-edit-fund-modal' => 'handleCloseEditFundModal',
         'modal-state-changed',
+        'refresh-specific-funds' => '$refresh'
+
     ];
 
     public ?string $modalOpen = null;
@@ -65,11 +67,15 @@ use Livewire\Component;
     {
         $this->model = $model;
         $this->fund = Fonds::find($model);
-        if ($this->fund) {
-            $this->form->title = $this->fund->title;
+
+        if (!$this->fund) {
+            $this->redirectRoute('accounting');
+            return;
         }
 
+        $this->form->title = $this->fund->title;
     }
+
 
     public function editFund(): void
     {
@@ -89,13 +95,14 @@ use Livewire\Component;
 
         if ($fund) {
             $fund->delete();
+            $this->form->reset();
+            $this->showModal = false;
             $this->dispatch('close-edit-fund-modal');
             $this->dispatch('refresh-specific-funds');
-            $this->dispatch('fund-deleted', id: $this->model);
+
+            $this->redirectRoute('accounting');
         }
     }
-
-
     public function render()
     {
         return view('livewire.modals.edit-fund');
