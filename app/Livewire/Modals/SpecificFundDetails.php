@@ -12,32 +12,64 @@ class SpecificFundDetails extends Component
 {
     use WithPagination;
     public Fonds $specificFund;
-    public $showModal = true;
+    public $showModal = false;
     public $search = '';
+    public bool $allowOpen = true;
+    protected $listeners = ['block-open', 'allow-open', 'modal-state-changed'];
 
-    protected $listeners = [
-        'modal-opened' => 'checkIfShouldOpen',
-    ];
+    public function blockOpen()
+    {
+        $this->allowOpen = false;
+        $this->showModal = false;
+    }
 
-    #[On('close-modal')]
+    public function allowOpen()
+    {
+        if ($this->modalOpen === null) {
+            $this->allowOpen = true;
+            $this->showModal = true;
+            $this->emit('modal-state-changed', 'details');
+        }
+    }
+
+    public function modalStateChanged($modal)
+    {
+        $this->modalOpen = $modal;
+        if ($modal !== 'details') {
+            $this->showModal = false;
+        }
+    }
+
+    public function close()
+    {
+        $this->showModal = false;
+        $this->modalOpen = null;
+        $this->emit('modal-state-changed', null);
+        $this->dispatch('close-specific-fund-modal');
+    }
+
+
+
+    #[On('close-specific-fund-modal')]
     public function onCloseModal()
     {
         $this->showModal = false;
     }
 
 
-    public function close()
-    {
-        $this->showModal = false;
-        $this->dispatch('close-modal');
-    }
-
-
     public function mount($model)
     {
-        $this->specificFund = Fonds::findOrFail($model);
-        $this->showModal = true;
+        $this->specificFund = Fonds::find($model);
+        if (!$this->specificFund) {
+            $this->dispatch('close-specific-fund-modal');
+            return;
+        }
+        if ($this->allowOpen) {
+            $this->showModal = true;
+        }
     }
+
+
 
 
     public function open()
@@ -56,7 +88,6 @@ class SpecificFundDetails extends Component
             '<span class="text-black-500 font-bold underline ">$1</span>',
             e($text)
         );
-
         return $highlighted;
     }
 

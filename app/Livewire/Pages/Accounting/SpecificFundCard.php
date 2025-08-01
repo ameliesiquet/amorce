@@ -20,6 +20,14 @@ class SpecificFundCard extends Component
         $this->modal = null;
         $this->modalParams = null;
     }
+    #[On('fund-deleted')]
+    public function onFundDeleted($id)
+    {
+        if ($this->specificFund->id == $id) {
+            $this->modal = null;
+            $this->modalParams = null;
+        }
+    }
 
     public function mount(Fonds $fund)
     {
