@@ -8,7 +8,7 @@
                     <div class="pointer-events-auto relative w-screen max-w-screen-md bg-white">
                         <div class="flex p-6">
                             <button
-                                @close-edit-fund-modal.window="isOpen = false"
+                                wire:click="handleCloseEditFundModal"
                                 type="button"
                                 class="relative rounded-md text-gray-300 hover:text-white focus:outline-none focus:ring-2 focus:ring-white">
                                 <span class="absolute -inset-2.5"></span>
