@@ -25,10 +25,7 @@
 
                                 <form wire:submit.prevent="makeTransaction"
                                       class="flex flex-col gap-6 w-full px-8 py-10 rounded-3xl border border-solid border-black border-opacity-10 shadow-[0px_0px_4px_rgba(0,0,0,0.25)] max-md:px-5">
-
                                     @csrf
-
-                                    {{-- De (aktiver Fund, nicht auswählbar) --}}
                                     <input type="hidden" wire:model.defer="form.from_fund" value="{{ $fund->id }}">
                                     <div class="flex flex-col gap-2">
                                         <label class="block text-xl font-medium text-black">De</label>
