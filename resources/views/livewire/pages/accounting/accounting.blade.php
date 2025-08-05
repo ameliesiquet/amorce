@@ -57,6 +57,4 @@
             :key="'details-' . $modalParams['id'] . '-' . $modalParams['timestamp']"
         />
     @endif
-
-
 </main>
