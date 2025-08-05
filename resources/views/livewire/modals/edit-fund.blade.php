@@ -1,5 +1,6 @@
 <section x-data="{ isOpen: @entangle('showModal') }">
-    <div x-show="$wire.showModal" @close-edit-fund-modal.window="$wire.showModal = false" @wire:loading.remove class="relative z-10" aria-labelledby="slide-over-title" role="dialog"
+    <div x-show="isOpen" @close-edit-fund-modal.window="$wire.showModal = false" @wire:loading.remove
+         class="relative z-10" aria-labelledby="slide-over-title" role="dialog"
          aria-modal="true">
         <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
         <div class="fixed inset-0 overflow-hidden">
@@ -50,13 +51,29 @@
                                 </form>
                                 <div class="mt-6">
                                     <form wire:submit.prevent="deleteFund">
-                                        <button type="submit"
-                                                class="flex gap-1.5 text-xs lg:text-sm xl:text-l items-center px-2 py-2 lg:px-3 md:py-3 my-auto text-black bg-white rounded-xl shadow-[0px_4px_4px_rgba(0,0,0,0.25)] whitespace-nowrap">
+                                        <x-buttons.white-button type="submit"
+                                                                class="flex gap-1.5 text-xs lg:text-sm xl:text-l items-center px-2 py-2 lg:px-3 md:py-3 my-auto text-black bg-white rounded-xl shadow-[0px_4px_4px_rgba(0,0,0,0.25)] whitespace-nowrap">
                                             <x-icons.delete/>
                                             <p class="ml-2">Supprimer le fond</p>
-                                        </button>
+                                        </x-buttons.white-button>
                                     </form>
                                 </div>
+                                @if($cannotDeleteMessage)
+                                    <div
+                                        class="flex flex-col gap-4 bg-red-100 text-red-800 p-5 rounded-xl border border-red-300 shadow-sm mt-4 items-baseline">
+                                        <p class="text-sm md:text-base font-medium">
+                                            {{ $cannotDeleteMessage }}
+                                        </p>
+                                        <button
+                                            wire:click="handleCloseEditFundModal"
+                                            type="button"
+                                            class="flex gap-1.5 text-xs lg:text-sm xl:text-l items-center px-2 py-2 lg:px-3 md:py-3 my-auto text-black bg-white rounded-xl shadow-[0px_4px_4px_rgba(0,0,0,0.25)] whitespace-nowrap hover:bg-amber-50"
+                                        >
+                                            <x-icons.arrow-left/>
+                                            <span>Retourner pour verser l'argent restant</span>
+                                        </button>
+                                    </div>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -64,4 +81,9 @@
             </div>
         </div>
     </div>
+    @if($showTransferModal)
+        <livewire:modals.transfer-from-edit-fund
+            :model="$model"
+            :key="'transfer-'.$model.'-'.now()->timestamp"/>
+    @endif
 </section>
