@@ -18,7 +18,17 @@ class UserSeeder extends Seeder
         User::factory()->create([
             'name' => 'Amélie Siquet',
             'email' => 'ameliesiquet@icloud.com',
-            'password' => 'secret',
+            'password' => '1Secret-',
+        ]);
+        User::factory()->create([
+            'name' => 'Michaël',
+            'email' => 'michael@example.com',
+            'password' => '1Secret-',
+        ]);
+        User::factory()->create([
+            'name' => 'Dominique',
+            'email' => 'dominique@example.com',
+            'password' => '1Secret-',
         ]);
     }
 }
