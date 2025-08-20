@@ -14,10 +14,9 @@
     @vite(['resources/css/app.css'], ['resources/js/app.css'])
 </head>
 <body class="font-sans antialiased flex h-screen">
-<!-- Header -->
+
 <x-full-header/>
 
-<!-- Main -->
 {{ $slot }}
 @livewire('modals.container')
 </body>
