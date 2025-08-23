@@ -22,7 +22,6 @@ class SpecificFunds extends Component
 
     public function refreshSpecificFunds()
     {
-        // Leerer Trigger, zwingt Livewire zum re-render durch das Event
     }
 
 

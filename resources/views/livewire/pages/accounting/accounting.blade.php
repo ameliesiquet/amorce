@@ -22,7 +22,7 @@
                     </p>
                 </x-buttons.white-button>
             </a>
-            <a href="" wire:click.prevent="openmodal('import-csv')">
+            <a href="#" wire:click.prevent="openmodal('import-csv')">
                 <x-buttons.yellow-button>
                     <x-icons.import/>
                     <p>Importer un fichier CSV</p>
@@ -57,4 +57,8 @@
             :key="'details-' . $modalParams['id'] . '-' . $modalParams['timestamp']"
         />
     @endif
+    @if ($modal === 'import-csv')
+        <livewire:modals.import-csv :key="'import-csv-modal-' . now()->timestamp" />
+    @endif
+
 </main>

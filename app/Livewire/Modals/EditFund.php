@@ -22,8 +22,6 @@ use Livewire\Component;
 
     public $modal = null;
     public $modalParams = null;
-
-
     protected $listeners = [
         'openmodal' => 'handleOpenModal',
         'close-edit-fund-modal' => 'handleCloseEditFundModal',
@@ -32,14 +30,11 @@ use Livewire\Component;
         'close-modal' => 'closeModal'
 
     ];
-
     public function closeModal()
     {
         $this->modal = null;
         $this->modalParams = null;
     }
-
-
 
     public function handleOpenModal($modal)
     {
@@ -100,8 +95,6 @@ use Livewire\Component;
             - $fonds->transactions()->where('status_type', 'sortie')->sum('amount');
         return $balance;
     }
-
-
     public function deleteFund()
     {
         $balance = $this->getBalance();
@@ -123,15 +116,8 @@ use Livewire\Component;
     {
         $this->dispatch('close-edit-fund-modal');
         $this->showTransferModal = true;
-        // Optional: Validieren oder anderweitig nutzen
         $this->model = $id;
     }
-
-
-
-
-
-
 
     public function render()
     {

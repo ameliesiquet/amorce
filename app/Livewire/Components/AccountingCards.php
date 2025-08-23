@@ -10,11 +10,11 @@ class AccountingCards extends Component
     public $totalExpenses;
     public $totalFunds;
 
-    protected $listeners = ['refresh-funds' => 'loadData']; // 👈 Das ergänzt du
+    protected $listeners = ['refresh-funds' => 'loadData'];
 
     public function mount()
     {
-        $this->loadData(); // 👈 Logik ausgelagert
+        $this->loadData();
     }
 
     public function loadData()
