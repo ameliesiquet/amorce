@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
             $table->decimal('amount', 10, 2);
-            $table->text('transaction_type');
+            $table->text('transaction_type')->nullable();
             $table->text('status_type');
             $table->timestamps();
             $table->unsignedBigInteger('fonds_id');
