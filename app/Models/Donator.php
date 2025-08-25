@@ -33,7 +33,8 @@ class Donator extends Model
 
     public function selections()
     {
-        return $this->belongsToMany(Selection::class, 'participations')
+        return $this->belongsToMany(Selection::class, 'donator_selection')
+            ->withPivot('status_in_selection')
             ->withTimestamps();
     }
 

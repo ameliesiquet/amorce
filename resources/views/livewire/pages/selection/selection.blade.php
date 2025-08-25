@@ -1,11 +1,11 @@
 <main class="flex flex-col gap-10 p-4 sm:p-8 ml-72">
-    <h1 class="mb-8 text-3xl font-bold">Détentes</h1>
+    <h1 class="text-3xl font-bold">Détentes</h1>
 
     <a href="" wire:click.prevent="openmodal('create-selection')" class="text-xs">
-        <x-buttons.yellow-button>
+        <x-buttons.white-button>
             <x-icons.transfer-money/>
             Créer une nouvelle détente
-        </x-buttons.yellow-button>
+        </x-buttons.white-button>
     </a>
 
     @if ($modal === 'create-selection')
@@ -15,18 +15,32 @@
     @endif
 
     <section class="flex flex-col gap-6">
-        @foreach($selections as $selection)
-            <article class="flex flex-col gap-6 px-6 py-8 bg-white rounded-3xl border border-solid border-black border-opacity-10 max-w-full shadow-[0px_0px_4px_rgba(0,0,0,0.2)]">
-                <div class="flex flex-col gap-2">
-                    <h3 class="text-2xl font-semibold">{{ $selection->name }}</h3>
-                    <hr>
-                </div>
+        <h2 class="mb-2 text-2xl font-bold">Actives</h2>
+        @if($activeSelections->isEmpty())
+            <p class="text-gray-500 text-sm">Aucune sélection active disponible.</p>
+        @else
+            @foreach($activeSelections as $selection)
+                <livewire:pages.selection.selection-card :selection="$selection" :key="$selection->id" />
+            @endforeach
+        @endif
 
-                @foreach($selections as $selection)
-                    <livewire:pages.selection.selection-card :selection="$selection" :key="$selection->id" />
-                @endforeach
+        <h2 class="mb-2 text-2xl font-bold">En attente</h2>
+        @if($pendingSelections->isEmpty())
+            <p class="text-gray-500 text-sm">Aucune sélection en attente disponible.</p>
+        @else
+            @foreach($pendingSelections as $selection)
+                <livewire:pages.selection.selection-card :selection="$selection" :key="$selection->id" />
+            @endforeach
+        @endif
 
-            </article>
-        @endforeach
+        <h2 class="mb-2 text-2xl font-bold">Fermées</h2>
+        @if($closedSelections->isEmpty())
+            <p class="text-gray-500 text-sm">Aucune sélection fermée disponible.</p>
+        @else
+            @foreach($closedSelections as $selection)
+                <livewire:pages.selection.selection-card :selection="$selection" :key="$selection->id" />
+            @endforeach
+        @endif
     </section>
+
 </main>

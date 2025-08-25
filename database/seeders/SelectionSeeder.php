@@ -1,5 +1,4 @@
 <?php
-
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
@@ -9,9 +8,6 @@ use Illuminate\Support\Carbon;
 
 class SelectionSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
         $selection = Selection::create([
@@ -37,7 +33,9 @@ class SelectionSeeder extends Seeder
                 ]),
             ]);
 
-            $selection->donators()->attach($donator->id);
+            $selection->donators()->attach($donator->id, [
+                'status_in_selection' => $status,
+            ]);
         }
     }
 }

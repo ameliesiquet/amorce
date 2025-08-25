@@ -2,46 +2,45 @@
 
 namespace App\Livewire\Pages\Selection;
 
-use Livewire\Attributes\Computed;
+use AllowDynamicProperties;
 use Livewire\Attributes\On;
 use Livewire\Component;
 use App\Models\Selection as SelectionModel;
-
 class Selection extends Component
 {
-    #[Computed]
-    public function selections()
-    {
-        return SelectionModel::all();
-    }
 
-
-    #[On('refresh-selections')]
-    public function refreshSelections()
-    {
-        unset($this->selections);
-    }
+    protected $listeners = ['selectionCreated' => 'refreshSelections'];
     public $modal = null;
-    public $modalParams = [];
+    public $modalParams = null;
 
-    public $selections;
 
-    public function openmodal($name, $params = null)
+    public function openmodal($which, $modelId = null): void
     {
-        $this->modal = $name;
-        $this->modalParams = $params;
+        $this->modal = $which;
+        $this->modalParams = [
+            'id' => $modelId,
+            'timestamp' => now()->timestamp,
+        ];
     }
 
-    public function mount()
+    #[On('close-modal')]
+    public function handleCloseModal()
     {
-        $this->selections = SelectionModel::with('donators')->orderBy('created_at', 'desc')->get();
+        $this->modal = null;
+        $this->modalParams = null;
     }
 
+    public function closeModal()
+    {
+        $this->modal = null;
+    }
 
     public function render()
     {
         return view('livewire.pages.selection.selection', [
-            'selections' => $this->selections,
+            'activeSelections' => \App\Models\Selection::where('status', \App\Enum\SelectionStatus::ACTIVE->value)->get(),
+            'pendingSelections' => \App\Models\Selection::where('status', \App\Enum\SelectionStatus::PENDING->value)->get(),
+            'closedSelections' => \App\Models\Selection::where('status', \App\Enum\SelectionStatus::CLOSED->value)->get(),
         ]);
     }
 }
