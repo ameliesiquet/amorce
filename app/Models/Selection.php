@@ -7,8 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Selection extends Model
 {
-    /** @use HasFactory<\Database\Factories\SelectionFactory> */
     use HasFactory;
+
     protected $fillable = [
         'name',
         'status',
@@ -18,10 +18,6 @@ class Selection extends Model
     {
         return $this->hasMany(Participation::class);
     }
-    public function projets()
-    {
-        return $this->belongsToMany(Projet::class);
-    }
 
     public function donators()
     {
@@ -30,6 +26,9 @@ class Selection extends Model
             ->withTimestamps();
     }
 
-
-
+    public function projects()
+    {
+        return $this->belongsToMany(Project::class, 'project_selection')
+            ->withTimestamps();
+    }
 }
