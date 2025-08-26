@@ -5,8 +5,9 @@
         <x-search-and-filter label="Rechercher un fond" field="search"/>
     </section>
     <section class="grid grid-cols-1 xl:grid-cols-2 2xl:grid-cols-3 gap-x-14 gap-y-8">
-        @foreach($this->specificFunds as $fund)
+        @foreach($specificFunds as $fund)
             <livewire:pages.accounting.specific-fund-card :$fund wire:key="fund-{{ $fund->id }}"/>
         @endforeach
+
     </section>
 </div>

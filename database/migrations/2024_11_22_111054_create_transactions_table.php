@@ -14,11 +14,14 @@ return new class extends Migration
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
             $table->decimal('amount', 10, 2);
-            $table->text('transaction_type');
+            $table->text('transaction_type')->nullable();
             $table->text('status_type');
             $table->timestamps();
             $table->unsignedBigInteger('fonds_id');
+            $table->unsignedBigInteger('donator_id')->nullable();
+
             $table->foreign('fonds_id')->references('id')->on('fonds')->onDelete('cascade');
+            $table->string('donor_name')->nullable();
 
             $table->unsignedBigInteger('from_fund_id')->nullable();
             $table->unsignedBigInteger('to_fund_id')->nullable();

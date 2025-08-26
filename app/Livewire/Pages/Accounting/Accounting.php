@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Livewire\Pages\Accounting;
 
 use App\Models\Fonds;
@@ -10,33 +11,39 @@ class Accounting extends Component
 {
     use WithPagination;
 
-    public $funds;
-    public $specificFunds;
     public $search = '';
 
+    protected $listeners = ['fundCreated' => '$refresh'];
+    public $isOpen = false;
+    public $modal = null;
+    public $modalParams = null;
 
-    public function mount(): void
+
+    public function openmodal($which, $modelId = null): void
     {
-        $this->funds = Fonds::where('specific', false)->get();
-
-        $this->specificFunds = Fonds::where('specific', true)->get();
+        $this->modal = $which;
+        $this->modalParams = [
+            'id' => $modelId,
+            'timestamp' => now()->timestamp,
+        ];
     }
 
-
-
-    public function openmodal($which, $model = null): void
+    #[On('close-modal')]
+    public function handleCloseModal()
     {
-        $this->dispatch('openmodal', $which, $model);
+        $this->modal = null;
+        $this->modalParams = null;
     }
-
-
 
 
     public function render()
     {
         return view('livewire.pages.accounting.accounting', [
-            'funds' => $this->funds,
-            'specificFunds' => $this->specificFunds,
+            'funds' => Fonds::where('specific', false)->latest()->get(),
+            'specificFunds' => Fonds::where('specific', true)
+                ->where('title', 'like', '%' . $this->search . '%')
+                ->latest()
+                ->get(),
         ]);
     }
 }

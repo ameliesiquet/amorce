@@ -11,7 +11,24 @@
             </tr>
             </thead>
             <tbody>
+            @php
+                $lastMonth = null;
+            @endphp
+
             @foreach ($transactions as $transaction)
+                @php
+                    $currentMonth = $transaction->created_at->format('Y-m');
+                @endphp
+
+                @if ($currentMonth !== $lastMonth)
+                    <tr class="mt-40">
+                        <td colspan="4" class="pt-4 pb-2 px-2 font-semibold text-gray-700">
+                            {{ $transaction->created_at->format('F Y') }}
+                        </td>
+                    </tr>
+                    @php $lastMonth = $currentMonth; @endphp
+                @endif
+
                 <tr class="border-t border-neutral-400" wire:key="{{$transaction->id}}">
                     <td class="py-3 pr-2 sm:py-4 sm:px-2">
                         {!! $this->highlight($transaction->created_at->format('d/m/Y'), $search) !!}
@@ -31,6 +48,7 @@
                     </td>
                 </tr>
             @endforeach
+
             </tbody>
         </table>
         <nav

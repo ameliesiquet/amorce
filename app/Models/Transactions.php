@@ -10,6 +10,11 @@ class Transactions extends Model
     use HasFactory;
 
     protected $fillable = [
-        'amount', 'transaction_type', 'status_type', 'created_at', 'fonds_id', 'id'
+        'amount', 'transaction_type','donator_id', 'status_type', 'donor_name','created_at', 'fonds_id', 'id'
     ];
+
+    public function donator()
+    {
+        return $this->belongsTo(Donator::class, 'donator_id');
+    }
 }

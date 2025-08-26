@@ -5,18 +5,12 @@ namespace App\Livewire\Modals;
 use App\Livewire\Forms\AddDonationFund;
 use App\Models\Fonds;
 use App\Models\Transactions;
-
 use Illuminate\Support\Carbon;
 use Livewire\Component;
 
-
 class AddDonation extends Component
 {
-    public $amount;
-    public $created_at;
-    public $fonds_id;
-    public $to_fund;
-    public $funds = [];
+    public $funds;
     public AddDonationFund $form;
 
     public function mount(): void
@@ -30,17 +24,11 @@ class AddDonation extends Component
         'form.fonds_id' => 'required|exists:fonds,id',
     ];
 
-
     public function addDonation()
     {
-        $this->form->amount = $this->amount;
-        $this->form->created_at = $this->created_at;
-        $this->form->fonds_id = $this->fonds_id;
-        $this->form->to_fund = $this->to_fund;
-
-
         $this->validate();
-        $date = Carbon::createFromFormat('d/m/y', $this->created_at);
+
+        $date = Carbon::createFromFormat('d/m/y', $this->form->created_at);
 
         Transactions::create([
             'amount' => $this->form->amount,
@@ -53,7 +41,6 @@ class AddDonation extends Component
         $this->dispatch('refresh-funds');
         $this->dispatch('close-modal');
     }
-
 
     public function render()
     {
