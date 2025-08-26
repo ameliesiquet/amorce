@@ -1,5 +1,4 @@
-@livewireStyles
-@livewireScripts
+
     <!doctype html>
 <html lang="fr"
       class="h-full bg-gray-100">
@@ -11,7 +10,9 @@
           content="ie=edge">
     <title>Amorce</title>
     <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css" rel="stylesheet" />
-    @vite(['resources/css/app.css'], ['resources/js/app.css'])
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @livewireStyles
+    @livewireScripts
 </head>
 <body class="font-sans antialiased flex h-screen">
 
