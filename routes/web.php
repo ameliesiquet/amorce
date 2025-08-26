@@ -2,11 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-
 
 Route::get('/dashboard', \App\Livewire\Pages\Dashboard\Dashboard::class)->name('dashboard');
 Route::get('/projects', \App\Livewire\Pages\Projects\Projects::class)->name('projects');

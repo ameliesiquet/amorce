@@ -16,7 +16,7 @@ new #[Layout('layouts.guest')] class extends Component {
 
         Session::regenerate();
 
-        $this->redirect(route('dashboard'));
+        $this->redirectIntended(default: route('dashboard', absolute: false), navigate: true);
     }
 
 }; ?>
