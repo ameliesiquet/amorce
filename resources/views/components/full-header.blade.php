@@ -1,6 +1,8 @@
 <header class="bg-zinc-900 flex lg:flex-col fixed top-0 left-0 lg:w-64 lg:h-screen shadow-lg z-50">
-    <x-application-logo/>
+    {{-- Logo --}}
+    <x-application-logo />
 
+    {{-- Sidebar --}}
     <aside id="default-sidebar"
            class="fixed top-0 left-0 z-40 w-64 h-screen min-h-screen transition-transform -translate-x-full lg:translate-x-0 lg:static lg:w-64"
            aria-label="Sidebar">
@@ -10,7 +12,7 @@
             <div class="mb-4 pl-8 pr-8 pt-2 pb-2
             {{ request()->routeIs('dashboard') ? 'bg-zinc-700' : 'hover:bg-zinc-700 active:bg-gray-700' }}">
                 <a class="group flex gap-3 items-center py-3" href="{{ route('dashboard') }}">
-                    <x-icons.home/>
+                    <x-icons.home />
                     <div class="text-white">Dashboard</div>
                 </a>
             </div>
@@ -19,7 +21,7 @@
             <div class="mb-4 pl-8 pr-8 pt-2 pb-2
             {{ request()->routeIs('projects') ? 'bg-zinc-700' : 'hover:bg-zinc-700 active:bg-gray-700' }}">
                 <a class="group flex gap-3 items-center py-3" href="{{ route('projects') }}">
-                    <x-icons.projects/>
+                    <x-icons.projects />
                     <div class="text-white">Projets</div>
                 </a>
             </div>
@@ -28,7 +30,7 @@
             <div class="mb-4 pl-8 pr-8 pt-2 pb-2
             {{ request()->routeIs('accounting') ? 'bg-zinc-700' : 'hover:bg-zinc-700 active:bg-gray-700' }}">
                 <a class="group flex gap-3 items-center py-3" href="{{ route('accounting') }}">
-                    <x-icons.accounting/>
+                    <x-icons.accounting />
                     <div class="text-white">Comptabilité</div>
                 </a>
             </div>
@@ -37,7 +39,7 @@
             <div class="mb-4 pl-8 pr-8 pt-2 pb-2
             {{ request()->routeIs('selection') ? 'bg-zinc-700' : 'hover:bg-zinc-700 active:bg-gray-700' }}">
                 <a class="group flex gap-3 items-center py-3" href="{{ route('selection') }}">
-                    <x-icons.selections/>
+                    <x-icons.selections />
                     <div class="text-white">Détentes</div>
                 </a>
             </div>
@@ -46,7 +48,7 @@
             <div class="mb-4 pl-8 pr-8 pt-2 pb-2
             {{ request()->routeIs('meeting') ? 'bg-zinc-700' : 'hover:bg-zinc-700 active:bg-gray-700' }}">
                 <a class="group flex gap-3 items-center py-3" href="{{ route('meeting') }}">
-                    <x-icons.meeting/>
+                    <x-icons.meeting />
                     <div class="text-white">Réunion</div>
                 </a>
             </div>
@@ -55,7 +57,7 @@
             <div class="mb-4 pl-8 pr-8 pt-2 pb-2
             {{ request()->routeIs('newsletter') ? 'bg-zinc-700' : 'hover:bg-zinc-700 active:bg-gray-700' }}">
                 <a class="group flex gap-3 items-center py-3" href="{{ route('newsletter') }}">
-                    <x-icons.newsletter/>
+                    <x-icons.newsletter />
                     <div class="text-white">Newsletter</div>
                 </a>
             </div>
