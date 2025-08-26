@@ -27,9 +27,9 @@
                         metus lupus corruptus ...
                     </div>
                     <div class="flex gap-10 justify-between items-start mt-3 w-full">
-                        <x-blue-button>
+                        <x-buttons.blue-button>
                             Agence liège
-                        </x-blue-button>
+                        </x-buttons.blue-button>
                         <x-see-arrow-right/>
                     </div>
                 </div>
@@ -46,18 +46,18 @@
                         metus lupus corruptus ...
                     </div>
                     <div class="flex gap-10 justify-between items-start mt-3 w-full">
-                        <x-blue-button>
+                        <x-buttons.blue-button>
                             Agence liège
-                        </x-blue-button>
+                        </x-buttons.blue-button>
                         <x-see-arrow-right/>
                     </div>
                 </div>
             </div>
             <div class="m-auto">
-                <x-yellow-button>
+                <x-buttons.yellow-button>
                     Ajouter un projet
                     <x-icons.add/>
-                </x-yellow-button>
+                </x-buttons.yellow-button>
             </div>
         </div>
 

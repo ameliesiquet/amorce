@@ -107,11 +107,11 @@
                     <div class="flex flex-col gap-4">
                         <div>
                             <p>Aujourd'hui</p>
-                            <x-yellow-button/>
+                            <x-buttons.yellow-button/>
                         </div>
                         <div>
                             <p>Demain</p>
-                            <x-yellow-button/>
+                            <x-buttons.yellow-button/>
                         </div>
                     </div>
                 </div>

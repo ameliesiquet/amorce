@@ -1,4 +1,5 @@
 <?php
+require __DIR__.'/auth.php';
 
 use Illuminate\Support\Facades\Route;
 
@@ -16,5 +17,4 @@ Route::get('/fund/edit/{model}', \App\Livewire\Modals\EditFund::class)->name('fu
 
 
 
-require __DIR__.'/auth.php';
 ini_set('memory_limit', '512M');
