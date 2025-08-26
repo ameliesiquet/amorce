@@ -18,7 +18,8 @@ return new class extends Migration
             $table->text('status_type');
             $table->timestamps();
             $table->unsignedBigInteger('fonds_id');
-            $table->unsignedBigInteger('donator_id');
+            $table->unsignedBigInteger('donator_id')->nullable();
+
             $table->foreign('fonds_id')->references('id')->on('fonds')->onDelete('cascade');
             $table->string('donor_name')->nullable();
 

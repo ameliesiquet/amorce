@@ -107,11 +107,6 @@ class CreateSelection extends Component
 
     public function createSelection()
     {
-        if (empty($this->winners)) {
-            $this->errorMessage = 'Veuillez sélectionner 3 participants.';
-            return;
-        }
-
         $name = $this->selectionName ?? Carbon::now()->format('F Y');
 
         $selection = Selection::create([
@@ -119,28 +114,37 @@ class CreateSelection extends Component
             'status' => $this->selectionStatus,
         ]);
 
-        // 🔹 Bestehende Teilnehmer hinzufügen
-        foreach ($this->participants as $participant) {
-            $selection->donators()->attach($participant->id, [
-                'status_in_selection' => $participant->selection_count,
-            ]);
+        $lastSelection = Selection::latest('id')->with('donators')->skip(1)->first();
 
-            $participant->selection_count = $participant->selection_count === 3 ? 1 : $participant->selection_count + 1;
-            $participant->save();
+        $donatorsToKeep = collect();
+
+        if ($lastSelection) {
+            $donatorsToKeep = $lastSelection->donators->filter(fn($d) => $d->pivot->status_in_selection < 3);
+
+            foreach ($donatorsToKeep as $donator) {
+                $selection->donators()->attach($donator->id, [
+                    'status_in_selection' => $donator->pivot->status_in_selection + 1,
+                ]);
+            }
         }
 
-        foreach ($this->winners as $winner) {
-            $donator = Donator::find($winner['id']);
+        $neededNew = 9 - $donatorsToKeep->count();
+        $newDonators = Donator::inRandomOrder()
+            ->whereNotIn('id', $donatorsToKeep->pluck('id'))
+            ->take($neededNew)
+            ->get();
 
+        foreach ($newDonators as $donator) {
             $selection->donators()->attach($donator->id, [
                 'status_in_selection' => 1,
             ]);
-
-            $donator->selection_count = $donator->selection_count ? $donator->selection_count + 1 : 1;
-            $donator->save();
         }
 
-
+        foreach ($selection->donators as $donator) {
+            $donator->selection_count = ($donator->selection_count ?? 0) + 1;
+            $donator->last_selection = now();
+            $donator->save();
+        }
 
         $this->showModal = false;
         $this->dispatch('openalert', ['message' => 'Création de la sélection terminé ✅']);
@@ -149,6 +153,18 @@ class CreateSelection extends Component
         $this->selectionName = '';
     }
 
+
+    private function updateDonatorCounts(Selection $selection): void
+    {
+        foreach ($selection->donators as $donator) {
+            $donator->selection_count = $donator->selection_count === 3
+                ? 1
+                : ($donator->selection_count ?? 0) + 1;
+
+            $donator->last_selection = now();
+            $donator->save();
+        }
+    }
 
 
     public function render()

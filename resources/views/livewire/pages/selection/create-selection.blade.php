@@ -57,7 +57,6 @@
             @if($errorMessage)
                 <div class="text-red-600 p-3 bg-red-100 rounded shadow-sm">{{ $errorMessage }}</div>
             @endif
-
             <button type="submit"
                     class="px-6 py-2 bg-green-500 hover:bg-green-600 text-white rounded-lg font-medium transition mt-4">
                 Créer la sélection

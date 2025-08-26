@@ -12,6 +12,7 @@ class Selection extends Model
     protected $fillable = [
         'name',
         'status',
+        'notes'
     ];
 
     public function attendances()

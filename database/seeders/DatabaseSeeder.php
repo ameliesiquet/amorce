@@ -14,7 +14,8 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             DonatorSeeder::class,
             SelectionSeeder::class,
-            ParticipationSeeder::class
+            ParticipationSeeder::class,
+            ProjectSeeder::class,
         ]);
     }
 }

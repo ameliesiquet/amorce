@@ -1,16 +1,24 @@
 <article x-data="{ open: false }" class="flex flex-col gap-2 border rounded-lg shadow p-4">
+
+
     <!-- Header -->
     <header @click="open = !open" class="cursor-pointer flex justify-between items-center">
-        <h3 class="text-lg font-semibold">{{ $selection->name }}</h3>
-        <button class="text-xs lg:text-sm xl:text-l px-2 py-1 text-black bg-amber-200 rounded-xl shadow hover:bg-amber-100">
+        <h3 class="text-xl font-semibold">{{ $selection->name }}</h3>
+        <button
+            class="text-xs lg:text-sm xl:text-l px-2 py-1 text-black bg-amber-200 rounded-xl shadow hover:bg-amber-100">
             <span x-text="open ? '-' : '+'" class="text-xl"></span>
         </button>
     </header>
 
-    <!-- Collapsible content -->
     <section x-show="open" x-transition class="mt-2 flex flex-col gap-6">
+        <button
+            type="button"
+            wire:click.prevent="openmodal('edit-selection-card')"
+            class="text-xs px-3 py-1 ounded shadow align-middle">
+            <x-icons.edit></x-icons.edit>
+        </button>
         <hr class="mb-2">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <article class="grid grid-cols-1 md:grid-cols-2 gap-6">
             {{-- Participants confirmés --}}
             <div>
                 <h4 class="text-xl font-medium mb-4">Participants confirmés</h4>
@@ -28,19 +36,19 @@
                         <tr class="border-b border-gray-200 hover:bg-gray-50">
                             <td class="px-4 py-2">{{ $donator->name }}</td>
                             <td class="px-4 py-2">{{ $donator->email }}</td>
-                            <td class="px-4 py-2">{{ $donator->selection_count }}</td>
+                            <td class="px-4 py-2">{{ $donator->pivot->status_in_selection }}</td>
                             <td class="px-4 py-2">
-                                <button type="button" wire:click="makeParticipantNo({{ $donator->id }})"
-                                        class="px-2 py-1 bg-red-500 hover:bg-red-600 text-white rounded">
-                                    Annuler
-                                </button>
+                                <a href="#" wire:click="makeParticipantNo({{ $donator->id }})">
+                                    <x-buttons.red-button>
+                                        Annuler
+                                    </x-buttons.red-button>
+                                </a>
                             </td>
                         </tr>
                     @endforeach
                     </tbody>
                 </table>
             </div>
-
             {{-- Participants en attente --}}
             <div>
                 <h4 class="text-xl font-medium mb-4">Participants en attente</h4>
@@ -60,77 +68,109 @@
                             <td class="px-4 py-2">{{ $donator->email }}</td>
                             <td class="px-4 py-2">{{ $donator->pivot->status_in_selection }}</td>
                             <td class="px-4 py-2 flex gap-2">
-                                <button type="button" wire:click="makeParticipantYes({{ $donator->id }})"
-                                        class="px-2 py-1 bg-green-500 hover:bg-green-600 text-white rounded">
-                                    Valider
-                                </button>
-                                <button type="button" wire:click="redrawParticipant({{ $donator->id }})"
-                                        class="px-2 py-1 bg-yellow-400 hover:bg-yellow-500 text-white rounded">
-                                    Retirer
-                                </button>
+                                <a href="#" wire:click="makeParticipantYes({{ $donator->id }})">
+                                    <x-buttons.green-button>
+                                        Valider
+                                    </x-buttons.green-button>
+                                </a>
+                                <a href="#" wire:click="releaseDonator({{ $donator->id }})">
+                                    <x-buttons.orange-button>
+                                        Retirer
+                                    </x-buttons.orange-button>
+                                </a>
+
                             </td>
                         </tr>
                     @endforeach
                     </tbody>
                 </table>
+                @if($selection->donators->where('disponibility', false)->count() === 0)
+                    <a class=" inline-block mt-4" wire:click="pickNewDonator" >
+                        <x-buttons.yellow-button>
+                            Tirer un nouveau donateur
+                        </x-buttons.yellow-button>
+                    </a>
+                @endif
             </div>
-        </div>
+        </article>
 
-        <!-- Projets TODO-->
-        <div class="flex flex-col px-5 pb-5 rounded-xl max-w-full">
-            <header class="flex flex-col justify-center w-full text-xl font-semibold text-black">
-                <div class="flex items-center w-full">
-                    <h1 class="flex gap-1.5 items-center self-stretch my-auto">
-                        <span class="gap-2.5 self-stretch my-auto">Projet(s) attribué(s)</span>
-                    </h1>
+        <article class="grid grid-cols-2 gap-6 max-md:grid-cols-1 py-8 pr-8 pl-5 rounded-xl ">
+            <div class=" flex flex-col gap-4">
+                <h3 class="text-xl font-medium text-black">Projets</h3>
+                {{-- Projets --}}
+                <div class="flex flex-col gap-6 bg-black p-4 rounded">
+                    <h4 class="text-xl font-medium text-white">Projets attribués</h4>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        @foreach($selection->projects as $project)
+                            <span
+                                class="px-3 py-2 bg-blue-300 rounded-full text-sm text-black">{{ $project->name }}</span>
+                        @endforeach
+                    </div>
+                    <div class="flex flex-col items-start gap-4">
+                        <h4 class="text-lg font-medium text-white">Ajouter un projet</h4>
+                        <div class="flex flex-row gap-6">
+                            <select id="newProject" wire:model="newProjectId"
+                                    class="border-gray-300 rounded-md shadow-sm w-fit box-border text-black">
+                                <option value="">Sélectionner un projet</option>
+                                @foreach($projects as $project)
+                                    <option value="{{ $project->id }}">{{ $project->name }}</option>
+                                @endforeach
+                            </select>
+                            <button type="button" wire:click="addProject"
+                                    class="px-3 py-1 bg-amber-200 rounded-xl text-black">
+                                Ajouter
+                            </button>
+                        </div>
+                    </div>
+                    <div class="flex flex-col items-start gap-4">
+                        <h4 class="text-lg font-medium text-white">Tous les projets en détail</h4>
+                        <ul class="flex flex-col gap-4">
+                            @foreach($selection->projects as $project)
+                                <li class="px-5 py-3.5 bg-white rounded text-black">
+                                    <div class="flex justify-between items-center">
+                                        <h4 class="text-lg font-semibold">{{ $project->name }}</h4>
+                                        <button type="button" wire:click="removeProject({{ $project->id }})"
+                                                class="px-2 py-1 bg-red-500 hover:bg-red-600 text-white rounded">
+                                            Retirer
+                                        </button>
+                                    </div>
+                                    <h4 class="mt-2 font-semibold">Description</h4>
+                                    <p>{{ $project->description }}</p>
+                                </li>
+                            @endforeach
+                        </ul>
+                    </div>
                 </div>
-            </header>
-            <!-- Projet -->
-            <main class="flex flex-col mt-5 w-full">
-                <article
-                    class="flex flex-col py-8 pr-8 pl-5 w-full rounded-xl border border-black border-solid bg-stone-900 shadow-[0px_0px_4px_rgba(0,0,0,0.25)] max-md:pr-5"
-                >
-                    <h2 class="pb-7 w-full text-xl font-semibold text-white">Travail pour l'agence de liège</h2>
-                    <p class="pb-6 mt-3 w-full text-sm leading-5 text-white">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent mattis
-                        ligula vel dolor feugiat, eu tempor diam accumsan. Sed lacinia eu nulla
-                        in finibus. Donec a lacus ac risus tincidunt tempus. Mauris sit amet
-                        metus lupus corruptus ...
-                    </p>
-                    <footer class="flex gap-10 justify-between items-start mt-3 w-full">
-                <span
-                    role="status"
-                    class="gap-2.5 self-stretch px-2 py-1.5 text-xs text-black bg-sky-200 rounded-[30px]"
-                >
-                    Agence liège
-                </span>
-                        <button
-                            class="flex gap-2.5 items-center px-1.5 py-2 bg-amber-200 rounded-[30px] w-[21px]"
-                            aria-label="Project options"
-                        >
-                            <img
-                                loading="lazy"
-                                src="https://cdn.builder.io/api/v1/image/assets/TEMP/45eff1e368f5f93b85df28ace8cae39d9903ce86aa01e02146bf11f23b52138f?placeholderIfAbsent=true&apiKey=2b615783ce9a425699ca8b86f7f04ecc"
-                                alt=""
-                                class="object-contain self-stretch my-auto w-2 aspect-square stroke-[1px] stroke-zinc-800"
-                            />
-                        </button>
-                    </footer>
-                </article>
+            </div>
+            {{-- Notes --}}
+            <div class="flex flex-col gap-4">
+                <h4 class="text-xl font-medium">Notes</h4>
+                <textarea wire:model="markdownNotes"
+                          wire:input="enableEditNotes"
+                          class="w-full min-h-[200px] p-4 rounded border border-gray-300 text-black"
+                          placeholder="Écrivez ici vos notes...">
 
-                <button
-                    class="flex gap-4 items-center self-end px-6 py-2.5 mt-4 text-xs text-black whitespace-nowrap bg-amber-200 rounded-md shadow-[0px_4px_4px_rgba(0,0,0,0.25)] max-md:px-5"
-                >
-                    <img
-                        loading="lazy"
-                        src="https://cdn.builder.io/api/v1/image/assets/TEMP/2f4eec387146b341f8af4ce70fd511594443eb2e958e01ec808a2bdaef55eff3?placeholderIfAbsent=true&apiKey=2b615783ce9a425699ca8b86f7f04ecc"
-                        alt=""
-                        class="object-contain shrink-0 self-stretch my-auto w-3.5 aspect-square"
-                    />
-                    <span>button</span>
-                </button>
-            </main>
-        </div>
+                </textarea>
+
+
+            @if (!$notesSaved)
+                    <a href="#" wire:click="saveNotes">
+                        <x-buttons.yellow-button>
+                            Enregistrer
+                        </x-buttons.yellow-button>
+                    </a>
+                @endif
+
+            @if (session()->has('message'))
+                    <span class="text-green-500 mt-2">{{ session('message') }}</span>
+                @endif
+            </div>
+        </article>
     </section>
 
+    @if ($modal === 'edit-selection-card')
+        <livewire:pages.selection.edit-selection-card
+            :key="'edit-selection-card'.now()->timestamp"
+        />
+    @endif
 </article>
