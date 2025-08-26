@@ -9,7 +9,6 @@
             </div>
             <hr>
         </div>
-        <x-search-and-filter field="search" label="Rechercher un projet"/>
         <div class="flex flex-col gap-4">
             <div
                 class="flex overflow-hidden over flex-col py-6 px-4  w-full border rounded-xl border-black border-opacity-10 shadow-[0px_4px_4px_rgba(0,0,0,0.25)]"

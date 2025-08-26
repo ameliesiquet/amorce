@@ -1,24 +1,26 @@
-
-    <!doctype html>
-<html lang="fr"
-      class="h-full bg-gray-100">
+<!doctype html>
+<html lang="fr" class="h-full bg-gray-100">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible"
-          content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Amorce</title>
+
     <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css" rel="stylesheet" />
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @livewireStyles
-    @livewireScripts
 </head>
 <body class="font-sans antialiased flex h-screen">
 
-<x-full-header/>
+<x-full-header />
 
-{{ $slot }}
+<main class="flex-1">
+    {{ $slot }}
+</main>
+
 @livewire('modals.container')
+@livewireScripts
+
+<script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js" defer></script>
 </body>
 </html>
