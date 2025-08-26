@@ -5,26 +5,30 @@
     <section class="flex flex-wrap gap-4 lg:gap-8 sm:justify-between items-center m-auto sm:m-0">
         <h2 class="hidden">Buttons</h2>
         <a href="" wire:click.prevent="openmodal('create-fund')">
-            <x-yellow-button>
+            <x-buttons.yellow-button>
                 <x-icons.add/>
-                Ajouter un fond
-            </x-yellow-button>
+                <p>
+                    Ajouter un fond
+                </p>
+            </x-buttons.yellow-button>
         </a>
+
         <div class="flex gap-4">
             <a href="" wire:click.prevent="openmodal('add-donation')">
-                <x-white-button>
+                <x-buttons.white-button>
                     <x-icons.add/>
                     <p>
                         Ajouter un don cash
                     </p>
-                </x-white-button>
+                </x-buttons.white-button>
             </a>
-            <x-yellow-button>
-                <x-icons.import/>
-                Importer un fichier CSV
-            </x-yellow-button>
+            <a href="#" wire:click.prevent="openmodal('import-csv')">
+                <x-buttons.yellow-button>
+                    <x-icons.import/>
+                    <p>Importer un fichier CSV</p>
+                </x-buttons.yellow-button>
+            </a>
         </div>
-
     </section>
 
     <section class="grid grid-cols-1 2xl:grid-cols-2 gap-6">
@@ -34,4 +38,27 @@
     </section>
 
     <livewire:pages.accounting.specific-funds/>
+    @if ($modal === 'add-donation')
+        <livewire:modals.add-donation
+            :funds="$funds"
+            :key="'add-donation-modal-' . ($modalParams['timestamp'] ?? now()->timestamp)"
+        />
+    @endif
+
+    @if ($modal === 'create-fund')
+        <livewire:modals.create-fund
+            :key="'create-fund-modal-' . ($modalParams['timestamp'] ?? now()->timestamp)"
+        />
+    @endif
+
+    @if ($modal === 'specific-fund-details')
+        <livewire:modals.specific-fund-details
+            :model="$modalParams['id']"
+            :key="'details-' . $modalParams['id'] . '-' . $modalParams['timestamp']"
+        />
+    @endif
+    @if ($modal === 'import-csv')
+        <livewire:modals.import-csv :key="'import-csv-modal-' . now()->timestamp" />
+    @endif
+
 </main>

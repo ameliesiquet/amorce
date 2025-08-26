@@ -8,7 +8,8 @@ use Livewire\Form;
 class EditFundForm extends Form
 {
     #[Validate]
-    public string $title;
+    public ?string $title = null;
+
 
 
     public function mount()

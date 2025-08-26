@@ -91,9 +91,10 @@ new #[Layout('layouts.guest')] class extends Component {
             <x-primary-button class="ms-4">
                 {{ __('Register') }}
             </x-primary-button>
-            <p class="mt-4">Déja un compte ?
-                <a href="{{ route('login') }}" class="text-white underline hover:text-amber-200">Login</a>
-            </p>
+
+            <p class="mt-4">Déja un compte ? <a href="{{ route('login') }}"
+                                                class="text-white underline hover:text-amber-200">Login</a></p>
+
         </div>
     </form>
 </div>

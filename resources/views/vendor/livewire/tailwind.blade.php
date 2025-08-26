@@ -1,13 +1,5 @@
 @php
-if (! isset($scrollTo)) {
-    $scrollTo = 'body';
-}
-
-$scrollIntoViewJsSnippet = ($scrollTo !== false)
-    ? <<<JS
-       (\$el.closest('{$scrollTo}') || document.querySelector('{$scrollTo}')).scrollIntoView()
-    JS
-    : '';
+    $scrollIntoViewJsSnippet = '';
 @endphp
 
 <div>
@@ -16,9 +8,7 @@ $scrollIntoViewJsSnippet = ($scrollTo !== false)
             <div class="flex gap-10 flex-1 sm:hidden">
                 <span>
                     @if ($paginator->onFirstPage())
-                        <span class="relative inline-flex items-center px-4 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 cursor-default leading-5 rounded-md ">
-                            {!! __('pagination.previous') !!}
-                        </span>
+                            <x-icons.arrow-left/>
                     @else
                         <button type="button" wire:click="previousPage('{{ $paginator->getPageName() }}')" x-on:click="{{ $scrollIntoViewJsSnippet }}" wire:loading.attr="disabled" dusk="previousPage{{ $paginator->getPageName() == 'page' ? '' : '.' . $paginator->getPageName() }}.before" class="inline-flex items-center p-1 text-gray-700 hover:text-gray-500 focus:outline-none focus:ring ring-blue-300 transition ease-in-out duration-150">
                             <x-icons.arrow-left/>
@@ -88,7 +78,7 @@ $scrollIntoViewJsSnippet = ($scrollTo !== false)
                                 @endforeach
                             @endif
                         @endforeach
-                        <span class="font-medium">({{ $paginator->total() }})</span>
+                        <span class="font-medium">({{ $paginator->lastPage() }})</span>
 
 
                         <span>

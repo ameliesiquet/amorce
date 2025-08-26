@@ -4,29 +4,31 @@
             <h3 class="flex gap-1.5 items-center self-stretch my-auto">{{ $fund->title }}</h3>
             <hr>
         </div>
-
-        <x-fund-info-card :total="$total" :income="$income" :expenses="$expenses" />
-
-
+        <x-accounting.fund-info-card :total="$total" :income="$income" :expenses="$expenses" />
 
         <article class="flex flex-col mt-5 sm:w-full">
             <div class="flex flex-col gap-4 justify-center sm:w-full">
                 <h4 class="text-lg font-semibold text-black md:text-base lg:text-lg">Transactions</h4>
                 <x-search-and-filter field="search" label="Rechercher une transaction"/>
             </div>
-            <x-fund-transactions :fund="$fund" :transactions="$transactions" :search="$search"></x-fund-transactions>
-
-
-
+            <x-accounting.fund-transactions :fund="$fund" :transactions="$transactions" :search="$search"></x-accounting.fund-transactions>
         </article>
 
         <div class="flex flex-wrap gap-8 items-end justify-between text-xs text-black md:gap-6 lg:gap-8">
             <a href="" wire:click.prevent="openmodal('make-transaction', {{ $fund->id }})" class="text-xs">
-                <x-white-button>
+                <x-buttons.white-button>
                     <x-icons.transfer-money/>
-                    Faire une transaction
-                </x-white-button>
+                    Transférer
+                </x-buttons.white-button>
             </a>
         </div>
     </div>
+    @if ($modal === 'make-transaction')
+        <livewire:modals.make-transaction
+            :model="$modalParams['id']"
+            :key="'transaction-'.$modalParams['id'].'-'.$modalParams['timestamp']"
+        />
+    @endif
+
+
 </section>

@@ -13,7 +13,10 @@ class Fonds extends Model
     protected $fillable = [
         'title',
     ];
-
+    public function participants()
+    {
+        return $this->hasMany(Participant::class, 'fund_id');
+    }
     public function transactions()
     {
         return $this->hasMany(Transactions::class, 'fonds_id', 'id');

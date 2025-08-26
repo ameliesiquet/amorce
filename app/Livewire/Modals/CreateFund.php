@@ -6,39 +6,42 @@ use AllowDynamicProperties;
 use App\Models\Fonds;
 use Livewire\Component;
 
-#[AllowDynamicProperties] class CreateFund extends Component
+
+class CreateFund extends Component
 {
-    public $title = '';
-    public $specific = false;
+    public $showModal = false;
+    public $title;
 
+    protected $listeners = ['openmodal' => 'handleOpenModal'];
 
-    protected $rules = [
-        'title' => 'required|string|max:255',
-        'specific' => 'boolean',
-    ];
+    public function handleOpenModal($modal)
+    {
+        if ($modal === 'create-fund') {
+            $this->showModal = true;
+        }
+    }
 
-
+    public function close()
+    {
+        $this->showModal = false;
+    }
 
     public function createFund()
     {
-        $this->validate();
+        $this->validate([
+            'title' => 'required|string|max:255',
+        ]);
 
-        // Neuen Fonds erstellen
         Fonds::create([
             'title' => $this->title,
             'specific' => true,
         ]);
 
-        // Eingabefelder zurücksetzen
-        $this->reset(['title', 'specific']);
-
-        // Event auslösen, um die Daten neu zu laden
-        $this->dispatch('refresh-funds');  // Ein benutzerdefiniertes Event, das die Seite neu lädt
-
-        // Modal schließen
+        $this->dispatch('fundCreated');
+        $this->dispatch('refresh-specific-funds');
         $this->dispatch('close-modal');
+        $this->reset(['title', 'showModal']);
     }
-
 
 
     public function render()
