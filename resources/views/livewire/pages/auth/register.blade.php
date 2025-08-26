@@ -22,17 +22,20 @@ new #[Layout('layouts.guest')] class extends Component {
         $validated = $this->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
-            'password' => ['required', 'string', 'confirmed', Rules\Password::defaults()],
+            'password' => ['required', 'string', 'min:8', 'confirmed', Rules\Password::defaults()],
         ]);
 
         $validated['password'] = Hash::make($validated['password']);
 
-        event(new Registered($user = User::create($validated)));
+        $user = User::create($validated);
+        event(new Registered($user));
 
         Auth::login($user);
 
         $this->redirect(route('dashboard', absolute: false), navigate: true);
     }
+
+
 }; ?>
     <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
@@ -41,15 +44,18 @@ new #[Layout('layouts.guest')] class extends Component {
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Login - Laravel</title>
 
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet"/>
 
+    <!-- Styles -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="bg-zinc-900 text-white h-screen flex items-center justify-center">
 
 <div class="bg-zinc-900 text-white h-screen flex items-center justify-center">
-    <form wire:submit="register" class="bg-zinc-900 p-10 border border-amber-200 rounded-2xl text-white">
+    <form wire:submit.prevent="register" class="bg-zinc-900 p-10 border border-amber-200 rounded-2xl text-white">
+        @csrf
         <div>
             <x-input-label for="name" :value="__('Name')"/>
             <x-text-input wire:model="name" id="name" class="block mt-1 w-full" type="text" name="name" required
@@ -57,6 +63,7 @@ new #[Layout('layouts.guest')] class extends Component {
             <x-input-error :messages="$errors->get('name')" class="mt-2"/>
         </div>
 
+        <!-- Email Address -->
         <div class="mt-4">
             <x-input-label for="email" :value="__('Email')"/>
             <x-text-input wire:model="email" id="email" class="block mt-1 w-full" type="email" name="email" required
@@ -64,24 +71,19 @@ new #[Layout('layouts.guest')] class extends Component {
             <x-input-error :messages="$errors->get('email')" class="mt-2"/>
         </div>
 
+        <!-- Password -->
         <div class="mt-4">
             <x-input-label for="password" :value="__('Password')"/>
-
-            <x-text-input wire:model="password" id="password" class="block mt-1 w-full"
-                          type="password"
-                          name="password"
+            <x-text-input wire:model="password" id="password" class="block mt-1 w-full" type="password" name="password"
                           required autocomplete="new-password"/>
-
             <x-input-error :messages="$errors->get('password')" class="mt-2"/>
         </div>
 
+        <!-- Confirm Password -->
         <div class="mt-4">
             <x-input-label for="password_confirmation" :value="__('Confirm Password')"/>
-
             <x-text-input wire:model="password_confirmation" id="password_confirmation" class="block mt-1 w-full"
-                          type="password"
-                          name="password_confirmation" required autocomplete="new-password"/>
-
+                          type="password" name="password_confirmation" required autocomplete="new-password"/>
             <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2"/>
         </div>
 
@@ -90,11 +92,8 @@ new #[Layout('layouts.guest')] class extends Component {
                 {{ __('Register') }}
             </x-primary-button>
             <p class="mt-4">Déja un compte ?
-                <a href="{{ route('login') }}"
-                                                class="text-white underline hover:text-amber-200">Login</a>
+                <a href="{{ route('login') }}" class="text-white underline hover:text-amber-200">Login</a>
             </p>
-
-
         </div>
     </form>
 </div>
