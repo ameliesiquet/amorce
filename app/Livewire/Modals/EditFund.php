@@ -18,6 +18,7 @@ use Livewire\Component;
     public bool $redirect = false;
     public $cannotDeleteMessage = null;
 
+    public $showTransferModal = false;
 
     public $modal = null;
     public $modalParams = null;
@@ -110,6 +111,12 @@ use Livewire\Component;
         $this->dispatch('refresh-specific-funds');
 
         $this->redirectRoute('accounting');
+    }
+    public function openTransferModal($id)
+    {
+        $this->dispatch('close-edit-fund-modal');
+        $this->showTransferModal = true;
+        $this->model = $id;
     }
 
     public function render()
