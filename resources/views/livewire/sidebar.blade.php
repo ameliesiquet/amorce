@@ -4,7 +4,7 @@
     >
         <h2 role="heading" aria-level="2" class="sr-only">Principal Navigation Menu</h2>
         <div
-            class="fixed top-0 left-0 w-full pl-5 pr-3.5 py-4 h-15 z-50 flex justify-between items-center bg-zinc-900 p-4 shadow-md text-white">
+            class="fixed top-0 left-0 w-full pl-5  py-4 h-15 z-50 flex justify-between items-center bg-zinc-900 p-4 shadow-md text-white">
             <a href="{{ route('dashboard') }}"
                title="Back to Homepage"
                class="flex items-center justify-start"
@@ -80,8 +80,8 @@
                     </a>
                 </div>
 
-                {{-- Logout --}}
-                <div class="mt-auto pl-8 pr-8 pt-2 pb-2 hover:bg-amber-200 hover:text-zinc-900 active:bg-amber-200">
+                <!-- Logout -->
+                <div class="pl-8 pr-8 pt-2 pb-2 hover:bg-amber-200 hover:text-zinc-900 active:bg-amber-200">
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
                         <button type="submit" class="text-white underline hover:text-zinc-900 w-full text-left">
@@ -101,8 +101,8 @@
         style="width: 16rem; overflow: visible;"
     >
         <div
-            class="h-full pt-6 pb-4 flex flex-col justify-between gap-4 overflow-visible rounded-tr-[16px] rounded-br-[16px] w-full ">
-            <div class="bg-zinc-900 min-h-[90vh]  flex flex-col justify-between">
+            class="h-full pt-6 pb-4 flex flex-col  gap-4 overflow-visible rounded-tr-[16px] rounded-br-[16px] w-full ">
+            <div class="bg-zinc-900 min-h-[90vh]  flex flex-col gap-4">
                 {{-- Dashboard --}}
                 <div class="mb-4 pl-8 pr-8 pt-2 pb-2
             {{ request()->routeIs('dashboard') ? 'bg-zinc-700' : 'hover:bg-zinc-700 active:bg-gray-700' }}">
@@ -157,8 +157,8 @@
                     </a>
                 </div>
 
-                {{-- Logout --}}
-                <div class="mt-auto pl-8 pr-8 pt-2 pb-2 hover:bg-amber-200 hover:text-zinc-900 active:bg-amber-200">
+                <!-- Logout -->
+                <div class=" pl-8 pr-8 pt-2 pb-2 hover:bg-amber-200 hover:text-zinc-900 active:bg-amber-200">
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
                         <button type="submit" class="text-white underline hover:text-zinc-900 w-full text-left">

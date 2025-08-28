@@ -14,7 +14,7 @@
 
 <x-full-header />
 
-<main class="flex-1">
+<main class="flex flex-col mt-8 sm:mt-6 gap-6  sm:gap-8 md:gap-10 py-16 px-8 sm:px-14 md:px-20 lg:px-24 lg:ml-64 ">
     {{ $slot }}
 </main>
 
