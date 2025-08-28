@@ -1,64 +1,22 @@
-<section class="recent-project">
-    <div
-        class="flex flex-col gap-4 px-8 py-5 mx-auto w-full bg-white rounded-3xl border border-solid border-black border-opacity-10 max-w-sm shadow-[0px_0px_4px_rgba(0,0,0,0.25)]"
-        role="region" aria-label="Current Projects Section">
-        <div class="flex flex-col gap-2 justify-center w-full text-2xl font-semibold text-black">
-            <div class="flex justify-between items-center">
-                <h2 class="gap-2.5 self-stretch my-auto">Projets en cours</h2>
-                <x-icons.edit/>
-            </div>
-            <hr>
-        </div>
-        <div class="flex flex-col gap-4">
-            <div
-                class="flex overflow-hidden over flex-col py-6 px-4  w-full border rounded-xl border-black border-opacity-10 shadow-[0px_4px_4px_rgba(0,0,0,0.25)]"
-                role="list">
-                <div
-                    class="flex flex-col items-start py-8 pr-8 pl-5 w-full rounded-xl border border-black border-solid bg-stone-900 shadow-[0px_0px_4px_rgba(0,0,0,0.25)]"
-                    role="listitem">
-                    <div class="py-0.5 text-xl font-semibold text-white">
-                        Travail pour l'agence de liège
-                    </div>
-                    <div class="mt-3 text-xs leading-4 text-white">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent mattis
-                        ligula vel dolor feugiat, eu tempor diam accumsan. Sed lacinia eu nulla
-                        in finibus. Donec a lacus ac risus tincidunt tempus. Mauris sit amet
-                        metus lupus corruptus ...
-                    </div>
-                    <div class="flex gap-10 justify-between items-start mt-3 w-full">
-                        <x-buttons.blue-button>
-                            Agence liège
-                        </x-buttons.blue-button>
-                        <x-see-arrow-right/>
-                    </div>
-                </div>
-                <div
-                    class="flex flex-col items-start py-8 pr-8 pl-5 mt-4 w-full rounded-xl border border-black border-solid bg-stone-900 shadow-[0px_0px_4px_rgba(0,0,0,0.25)]"
-                    role="listitem">
-                    <div class="py-0.5 text-xl font-semibold text-white">
-                        Travail pour l'agence de liège
-                    </div>
-                    <div class="mt-3 text-xs leading-4 text-white">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent mattis
-                        ligula vel dolor feugiat, eu tempor diam accumsan. Sed lacinia eu nulla
-                        in finibus. Donec a lacus ac risus tincidunt tempus. Mauris sit amet
-                        metus lupus corruptus ...
-                    </div>
-                    <div class="flex gap-10 justify-between items-start mt-3 w-full">
-                        <x-buttons.blue-button>
-                            Agence liège
-                        </x-buttons.blue-button>
-                        <x-see-arrow-right/>
-                    </div>
-                </div>
-            </div>
-            <div class="m-auto">
-                <x-buttons.yellow-button>
-                    Ajouter un projet
-                    <x-icons.add/>
-                </x-buttons.yellow-button>
-            </div>
-        </div>
+<div class="flex flex-col gap-6 rounded-xl">
+    <h2 class="text-xl font-semibold text-black">Mes derniers projets</h2>
 
-    </div>
-</section>
+    <ul class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        @foreach($projects as $project)
+            <li class="bg-zinc-900 rounded-xl shadow-md p-5 flex flex-col justify-between hover:shadow-lg transition-shadow text-white">
+                <div class="flex justify-between items-start gap-2">
+                    <h3 class="text-lg font-bold">{{ $project->name }}</h3>
+                </div>
+                <p class="mt-4 text-sm text-white">{{ $project->description }}</p>
+
+                @if($project->tags && count($project->tags) > 0)
+                    <div class="mt-3 flex flex-wrap gap-2">
+                        @foreach($project->tags as $tag)
+                            <span class="px-2 py-1 bg-blue-200 rounded-full text-xs text-black">{{ $tag->name }}</span>
+                        @endforeach
+                    </div>
+                @endif
+            </li>
+        @endforeach
+    </ul>
+</div>
