@@ -18,5 +18,8 @@
                 @endif
             </li>
         @endforeach
+            <a href="{{ route('projects') }}">
+                <x-buttons.yellow-button>Voir tous mes projets</x-buttons.yellow-button>
+            </a>
     </ul>
 </div>
