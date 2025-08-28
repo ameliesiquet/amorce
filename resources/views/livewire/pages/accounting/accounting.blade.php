@@ -1,4 +1,4 @@
-<main class="flex flex-col mt-2 sm:mt-6 gap-6  sm:gap-8 md:gap-10 py-16 px-8 sm:px-14 md:px-20 lg:px-24 lg:ml-64 ">
+<section class="flex flex-col gap-6">
     <h1 class=" text-3xl font-bold">Comptabilité</h1>
     <livewire:components.accounting-cards/>
 
@@ -61,4 +61,4 @@
         <livewire:modals.import-csv :key="'import-csv-modal-' . now()->timestamp" />
     @endif
 
-</main>
+</section>

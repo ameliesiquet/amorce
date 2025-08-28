@@ -11,7 +11,7 @@
                             <button
                                 wire:click="handleCloseEditFundModal"
                                 type="button"
-                                class="relative rounded-md text-gray-300 hover:text-white focus:outline-none focus:ring-2 focus:ring-white">
+                                class="relative rounded-md text-gray-300 hover:text-white focus:outline-none focus:ring-2 focus:ring-white mt-20">
                                 <span class="absolute -inset-2.5"></span>
                                 <span class="sr-only">Close panel</span>
                                 <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -20,7 +20,7 @@
                                 </svg>
                             </button>
                         </div>
-                        <div class="flex h-full flex-col items-center mx-auto shadow-xl mt-4">
+                        <div class="flex h-full flex-col items-center mx-auto shadow-xl mt-4 p-6">
                             <div class="flex flex-col gap-10 w-full max-w-xl">
                                 <h2 class="text-2xl font-semibold text-gray-800 text-left">Modifier le fond</h2>
                                 <form method="POST" wire:submit.prevent="editFund"

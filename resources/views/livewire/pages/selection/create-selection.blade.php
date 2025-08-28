@@ -1,5 +1,5 @@
 <x-modal>
-        <form wire:submit.prevent="createSelection" class="flex flex-col gap-6 max-h-[100vh] overflow-y-auto">
+        <form wire:submit.prevent="createSelection" class="flex flex-col gap-6 max-h-[100vh] overflow-y-auto mb-10">
             <h2 class="text-3xl font-bold text-gray-800">Créer une nouvelle sélection</h2>
             <div class="flex flex-col gap-2">
                 <label for="selectionName" class="font-medium text-gray-700">Nom</label>
@@ -58,7 +58,7 @@
                 <div class="text-red-600 p-3 bg-red-100 rounded shadow-sm">{{ $errorMessage }}</div>
             @endif
             <button type="submit"
-                    class="px-6 py-2 bg-green-500 hover:bg-green-600 text-white rounded-lg font-medium transition mt-4">
+                    class="px-6 py-2 bg-green-500 hover:bg-green-600 text-white rounded-lg font-medium transition mt-4 mb-10">
                 Créer la sélection
             </button>
         </form>

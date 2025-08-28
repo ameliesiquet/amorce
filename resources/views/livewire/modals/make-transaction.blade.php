@@ -7,7 +7,7 @@
             <div class="absolute inset-0 overflow-hidden">
                 <div class="pointer-events-none fixed inset-y-0 right-0 flex pl-10">
                     <div class="pointer-events-auto relative w-screen max-w-screen-md bg-white">
-                        <div class="flex p-6 mt-10 lg:mt-0">
+                        <div class="flex p-6 mt-20 lg:mt-0">
                             <button @click="isOpen = false" type="button"
                                     class="relative rounded-md text-gray-300 hover:text-white focus:outline-none focus:ring-2 focus:ring-white">
                                 <span class="absolute -inset-2.5"></span>
@@ -19,7 +19,7 @@
                             </button>
                         </div>
 
-                        <article class="flex h-full flex-col items-center mx-auto shadow-xl mt-4">
+                        <article class="flex h-full flex-col items-center mx-auto shadow-xl mt-4 p-6">
                             <div class="flex flex-col gap-10 w-full max-w-xl">
                                 <h2 class="text-2xl font-semibold text-gray-800 text-left">Faire une transaction</h2>
 

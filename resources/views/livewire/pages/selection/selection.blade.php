@@ -1,4 +1,4 @@
-<main class="flex flex-col gap-10 p-4 sm:p-8 ml-72">
+<main class="flex flex-col gap-6 ">
     <h1 class="text-3xl font-bold">Détentes</h1>
 
     <a href="" wire:click.prevent="openmodal('create-selection')" class="text-xs">

@@ -4,10 +4,8 @@
         <input type="text" placeholder="Rechercher une réunion"
                class="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-amber-200" />
     </div>
-    <div class="flex flex-col lg:flex-row gap-6">
-        <div class="flex-1 bg-white rounded-2xl shadow-md p-6 max-w-lg">
+    <div class="flex flex-col gap-6">
             <livewire:pages.dashboard.calendar />
-        </div>
         <div class="flex-1 bg-white rounded-2xl shadow-md p-6 max-w-lg">
             <h2 class="text-xl font-semibold mb-4">Aujourd’hui - 02/11/2024</h2>
 
